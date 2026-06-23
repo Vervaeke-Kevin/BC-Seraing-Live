@@ -39,12 +39,19 @@ function extractScore(text, block = "") {
   return "";
 }
 
+function normalizeMatchPlayerName(name) {
+  return stripTags(name)
+    .replace(/\s*\[(?:\d+|WDN|RET|WO)\]\s*/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function extractPlayersFromMatch(block) {
   const rowStarts = [...block.matchAll(/<div class="match__row(?:\s| has-won)[^"]*">/gi)].map(match => match.index);
   const rows = rowStarts.map((start, index) => block.slice(start, rowStarts[index + 1] ?? block.length));
   const rowItems = rows.map(row => {
     const players = [...row.matchAll(/data-player-id="[^"]+"[\s\S]*?<span class="nav-link__value">([\s\S]*?)<\/span>/gi)]
-      .map(match => stripTags(match[1]).replace(/\s*\[(?:WDN|RET|WO)\]\s*/gi, "").trim())
+      .map(match => normalizeMatchPlayerName(match[1]))
       .filter(Boolean);
     return { players, won: /\bhas-won\b/i.test(row) };
   }).filter(row => row.players.length);

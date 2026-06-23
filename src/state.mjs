@@ -119,12 +119,29 @@ export function createTournamentState(config) {
     return new Map(state.players.map(player => [player.name, player.gender]));
   }
 
+  function activateTournamentData() {
+    if (state.usingTournamentData) return;
+    const now = secondsNow();
+    state.players = [];
+    state.courts = Array.from({ length: 12 }, (_, index) => emptyCourt(index + 1, now));
+    state.completedMatches = [];
+    state.upcomingMatches = [];
+    state.usingTournamentData = true;
+    log("TS : données réelles détectées, simulation désactivée.");
+  }
+
   async function fetchText(url) {
-    const response = await fetch(url, {
-      headers: {
-        "user-agent": "Mozilla/5.0 BC-Seraing-Live/0.1"
-      }
-    });
+    let response;
+    try {
+      response = await fetch(url, {
+        headers: {
+          "user-agent": "Mozilla/5.0 BC-Seraing-Live/0.1"
+        }
+      });
+    } catch (error) {
+      const cause = error.cause?.code ? ` (${error.cause.code})` : "";
+      throw new Error(`Lecture TournamentSoftware impossible${cause}`);
+    }
     if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`);
     return response.text();
   }
@@ -191,13 +208,7 @@ export function createTournamentState(config) {
     const active = parsedMatches.filter(match => match.status === "active" && match.court);
     const finished = parsedMatches.filter(match => match.status === "finished");
 
-    if (!state.usingTournamentData) {
-      state.courts = Array.from({ length: 12 }, (_, index) => emptyCourt(index + 1, now));
-      state.completedMatches = [];
-      state.upcomingMatches = [];
-      state.usingTournamentData = true;
-      log("TS : données réelles détectées, simulation désactivée.");
-    }
+    activateTournamentData();
 
     mergeUpcomingMatches(parsedMatches);
     const activeCourtNumbers = new Set(active.map(match => match.court));
@@ -245,6 +256,17 @@ export function createTournamentState(config) {
     });
   }
 
+  function disableSimulationAfterLiveFailure() {
+    if (config.useLocalHtml || state.usingTournamentData) return;
+    const now = secondsNow();
+    state.players = [];
+    state.courts = Array.from({ length: 12 }, (_, index) => emptyCourt(index + 1, now));
+    state.upcomingMatches = [];
+    state.completedMatches = [];
+    state.usingTournamentData = true;
+    log("TS : synchro live impossible, données de simulation masquées.");
+  }
+
   async function syncNow(reason = "auto") {
     const matchesUrl = `${config.tournamentUrl}/matches`;
     const playersUrl = `${config.tournamentUrl}/players`;
@@ -257,6 +279,7 @@ export function createTournamentState(config) {
       const parsedMatches = parseMatchesHtml(matchesSource.html);
       const parsedPlayers = parsePlayersHtml(playersSource.html);
 
+      if (parsedMatches.length || parsedPlayers.length) activateTournamentData();
       if (parsedPlayers.length) mergePlayers(parsedPlayers);
       if (parsedMatches.length) mergeLiveMatches(parsedMatches);
 
@@ -269,9 +292,10 @@ export function createTournamentState(config) {
       };
       if (reason === "manual") log("Synchro manuelle effectuée.");
     } catch (error) {
+      disableSimulationAfterLiveFailure();
       state.sync = {
         ...state.sync,
-        source: "simulation",
+        source: config.useLocalHtml ? "simulation" : "tournamentsoftware",
         status: "fallback",
         lastSyncAt: nowIso(),
         lastError: error.message
