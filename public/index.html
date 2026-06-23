@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BC Seraing Live</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <div class="logo">BC</div>
+        <div>
+          <h1 id="pageTitle">Salle du tournoi</h1>
+          <div class="sub" id="syncStatus">Chargement...</div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="seg">
+          <button data-page="courts" class="active">Salle</button>
+          <button data-page="next">Prochains</button>
+          <button data-page="tournament">Tournoi</button>
+          <button data-page="player">Joueur</button>
+          <button data-page="info">Infos</button>
+        </div>
+        <div class="seg">
+          <button id="publicMode" class="active">Public</button>
+          <button id="orgaMode">Organisateur</button>
+        </div>
+        <button id="syncNow">Sync TS</button>
+      </div>
+    </header>
+
+    <main id="courtsView" class="view">
+      <section id="summary" class="summary"></section>
+      <section id="courts" class="courts"></section>
+      <section class="panel">
+        <h2>Dernières actions</h2>
+        <div id="eventLog" class="log"></div>
+      </section>
+    </main>
+
+    <main id="nextView" class="view hidden">
+      <section class="toolbar">
+        <div>
+          <h2>Liste des prochains matchs</h2>
+        </div>
+        <div class="toolbarRight">
+          <button id="clubFilterNext">Par club</button>
+          <select id="clubSelectNext"></select>
+        </div>
+      </section>
+      <section id="nextMatches" class="list"></section>
+    </main>
+
+    <main id="tournamentView" class="view hidden">
+      <section class="toolbar">
+        <div>
+          <h2>Vue tournoi</h2>
+        </div>
+        <div class="toolbarRight">
+          <button id="clubFilterTournament">Par club</button>
+          <select id="clubSelectTournament"></select>
+        </div>
+      </section>
+      <section class="grid2">
+        <div class="panel"><h2>Derniers résultats</h2><div id="recentResults" class="list"></div></div>
+        <div class="panel"><h2>Le marathon des matchs</h2><div id="longest"></div></div>
+        <div class="panel"><h2>La fusée</h2><div id="shortest"></div></div>
+        <div class="panel"><h2>Le marathonien / la marathonienne</h2><div id="timeLeaders"></div></div>
+        <div class="panel"><h2>L'exterminateur</h2><div id="exterminator"></div></div>
+      </section>
+    </main>
+
+    <main id="playerView" class="view hidden">
+      <section class="toolbar">
+        <div>
+          <h2>Fiche joueur</h2>
+        </div>
+        <select id="playerSelect" class="wideSelect"></select>
+      </section>
+      <section id="playerProfile"></section>
+    </main>
+
+    <main id="infoView" class="view hidden">
+      <section class="grid2">
+        <div class="panel">
+          <h2>Récompenses</h2>
+          <div class="reward"><strong>Vainqueurs</strong><span>Récompense principale du tableau.</span></div>
+          <div class="reward"><strong>Finalistes</strong><span>Récompense selon les dotations disponibles.</span></div>
+          <div class="reward"><strong>Stats fun</strong><span>Fusée, exterminateur, marathonien, coup de coeur.</span></div>
+        </div>
+        <div class="panel">
+          <h2>Partenaires</h2>
+          <div class="partners">
+            <div class="partner"><div>LOGO</div><strong>Partenaire principal</strong></div>
+            <div class="partner"><div>LOGO</div><strong>Restauration sportive</strong></div>
+            <div class="partner"><div>LOGO</div><strong>Matériel badminton</strong></div>
+            <div class="partner"><div>LOGO</div><strong>Soutien local</strong></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 BC Seraing Badminton. Tous droits réservés.</span>
+      <span>Application tournoi conçue avec assistance IA · Données TournamentSoftware à vérifier.</span>
+    </footer>
+  </div>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

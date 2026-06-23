@@ -1,0 +1,10 @@
+{
+  "name": "bc-seraing-live",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check server.mjs && node --check src/state.mjs && node --check src/simulation.mjs && node --check src/tournamentsoftware.mjs"
+  }
+}
