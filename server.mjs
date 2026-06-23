@@ -50,6 +50,12 @@ async function serveStatic(req, res) {
     res.writeHead(200, { "content-type": contentTypes[extname(filePath)] || "application/octet-stream" });
     res.end(body);
   } catch {
+    if (!extname(filePath)) {
+      const body = await readFile(join(publicDir, "index.html"));
+      res.writeHead(200, { "content-type": contentTypes[".html"] });
+      res.end(body);
+      return;
+    }
     res.writeHead(404);
     res.end("Not found");
   }

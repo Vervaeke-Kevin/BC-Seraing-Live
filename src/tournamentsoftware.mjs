@@ -1,5 +1,7 @@
 function decodeHtml(value) {
   return value
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)))
     .replace(/&nbsp;/g, " ")
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
@@ -21,8 +23,13 @@ function splitBlocks(html, marker) {
     .map(part => marker + part);
 }
 
+function splitListItemBlocks(html, className) {
+  const starts = [...html.matchAll(new RegExp(`<li\\b[^>]*class=["'][^"']*\\b${className}\\b[^"']*["'][^>]*>`, "gi"))].map(match => match.index);
+  return starts.map((start, index) => html.slice(start, starts[index + 1] ?? html.length));
+}
+
 function valuesIn(html) {
-  return [...html.matchAll(/<span class="nav-link__value">([\s\S]*?)<\/span>/gi)]
+  return [...html.matchAll(/<span\b[^>]*class=["'][^"']*\bnav-link__value\b[^"']*["'][^>]*>([\s\S]*?)<\/span>/gi)]
     .map(match => stripTags(match[1]))
     .filter(Boolean);
 }
@@ -128,11 +135,12 @@ export function parseMatchesHtml(html) {
 export function parsePlayersHtml(html) {
   const players = [];
 
-  for (const block of splitBlocks(html, '<li class="list__item js-alphabet-list-item"')) {
-    const title = block.match(/<h5 class="media__title">([\s\S]*?)<\/h5>/i)?.[1] || "";
-    const subinfo = block.match(/<div class="media__content-subinfo"[\s\S]*?<\/div>/i)?.[0] || "";
-    const name = normalizePlayerName(valuesIn(title)[0] || "");
-    const club = valuesIn(subinfo)[0] || "";
+  for (const block of splitListItemBlocks(html, "js-alphabet-list-item")) {
+    const title = block.match(/<h5\b[^>]*class=["'][^"']*\bmedia__title\b[^"']*["'][^>]*>([\s\S]*?)<\/h5>/i)?.[1] || "";
+    const subinfo = block.match(/<div\b[^>]*class=["'][^"']*\bmedia__content-subinfo\b[^"']*["'][^>]*>([\s\S]*?)<\/div>/i)?.[1] || "";
+    const allValues = valuesIn(block);
+    const name = normalizePlayerName(valuesIn(title)[0] || allValues[0] || "");
+    const club = valuesIn(subinfo)[0] || allValues.find(value => value && value !== allValues[0]) || "";
     if (!name || !club) continue;
     players.push({ name, club, gender: "" });
   }

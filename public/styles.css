@@ -30,6 +30,10 @@ button { cursor: pointer; }
 button.active, .seg button.active { background: var(--ink); color: white; border-color: var(--ink); }
 .seg { display: flex; border: 1px solid var(--line); background: var(--panel); padding: 4px; border-radius: 10px; gap: 4px; }
 .seg button { border: 0; background: transparent; padding: 8px 11px; }
+.modeLabel { border: 1px solid var(--line); background: var(--panel); color: var(--muted); border-radius: 8px; padding: 10px 12px; font-weight: 900; }
+.orga .modeLabel { background: var(--ink); color: white; border-color: var(--ink); }
+.orgaOnly { display: none; }
+.orga .orgaOnly { display: inline-flex; }
 .hidden { display: none; }
 .summary { display: grid; grid-template-columns: repeat(4, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px; }
 .metric, .panel, .toolbar, .court, .nextMatch { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); }

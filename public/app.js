@@ -16,7 +16,7 @@ const titles = {
 
 let appState = null;
 let page = "courts";
-let mode = "public";
+let mode = location.pathname.toLowerCase().includes("organisateur") || new URLSearchParams(location.search).get("mode") === "orga" ? "orga" : "public";
 let clubFilter = false;
 let selectedClub = "BC Seraing";
 let selectedPlayer = "Manon Orban";
@@ -50,11 +50,6 @@ function setPage(nextPage) {
   render();
 }
 
-function setMode(nextMode) {
-  mode = nextMode;
-  render();
-}
-
 function renderShell() {
   document.body.classList.toggle("orga", mode === "orga");
   $("pageTitle").textContent = titles[page];
@@ -64,8 +59,8 @@ function renderShell() {
 
   Object.entries(pages).forEach(([key, el]) => el.classList.toggle("hidden", key !== page));
   document.querySelectorAll("[data-page]").forEach(button => button.classList.toggle("active", button.dataset.page === page));
-  $("publicMode").classList.toggle("active", mode === "public");
-  $("orgaMode").classList.toggle("active", mode === "orga");
+  $("modeLabel").textContent = mode === "orga" ? "Organisateur" : "Public";
+  $("syncNow").classList.toggle("orgaOnly", mode !== "orga");
 }
 
 function renderSummary() {
@@ -249,8 +244,6 @@ function render() {
 }
 
 document.querySelectorAll("[data-page]").forEach(button => button.addEventListener("click", () => setPage(button.dataset.page)));
-$("publicMode").addEventListener("click", () => setMode("public"));
-$("orgaMode").addEventListener("click", () => setMode("orga"));
 $("syncNow").addEventListener("click", async () => { appState = await post("/api/sync/now"); render(); });
 $("clubFilterNext").addEventListener("click", () => { clubFilter = !clubFilter; render(); });
 $("clubFilterTournament").addEventListener("click", () => { clubFilter = !clubFilter; render(); });

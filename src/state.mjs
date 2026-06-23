@@ -143,13 +143,41 @@ export function createTournamentState(config) {
       throw new Error(`Lecture TournamentSoftware impossible${cause}`);
     }
     if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`);
-    return response.text();
+    const buffer = await response.arrayBuffer();
+    return decodePage(buffer, response.headers.get("content-type") || "");
+  }
+
+  function decodePage(buffer, contentType) {
+    const bytes = new Uint8Array(buffer);
+    const headerCharset = contentType.match(/charset=([^;]+)/i)?.[1]?.trim();
+    const utf8Preview = new TextDecoder("utf-8", { fatal: false }).decode(bytes.slice(0, 2048));
+    const metaCharset = utf8Preview.match(/charset=["']?([^"'\s/>]+)/i)?.[1]?.trim();
+    const charset = (headerCharset || metaCharset || "").toLowerCase();
+
+    if (charset && charset !== "utf-8" && charset !== "utf8") {
+      try {
+        return new TextDecoder(charset).decode(bytes);
+      } catch {
+        return new TextDecoder("windows-1252").decode(bytes);
+      }
+    }
+
+    const utf8 = new TextDecoder("utf-8", { fatal: false }).decode(bytes);
+    return utf8.includes("\uFFFD") ? new TextDecoder("windows-1252").decode(bytes) : utf8;
+  }
+
+  async function readLocalHtmlSource(name) {
+    const localPath = join(process.cwd(), "data", `${name}.html`);
+    if (existsSync(localPath)) {
+      return { html: await readFile(localPath, "utf8"), source: `data/${name}.html` };
+    }
+    return null;
   }
 
   async function readHtmlSource(name, url) {
-    const localPath = join(process.cwd(), "data", `${name}.html`);
-    if (config.useLocalHtml && existsSync(localPath)) {
-      return { html: await readFile(localPath, "utf8"), source: `data/${name}.html` };
+    if (config.useLocalHtml) {
+      const local = await readLocalHtmlSource(name);
+      if (local) return local;
     }
     return { html: await fetchText(url), source: url };
   }
@@ -271,13 +299,28 @@ export function createTournamentState(config) {
     const matchesUrl = `${config.tournamentUrl}/matches`;
     const playersUrl = `${config.tournamentUrl}/players`;
     try {
-      const [matchesSource, playersSource] = await Promise.all([
-        readHtmlSource("matches", matchesUrl),
-        readHtmlSource("players", playersUrl)
-      ]);
+      const matchesSource = await readHtmlSource("matches", matchesUrl);
+      let playersSource = { html: "", source: "" };
+      let playersWarning = null;
+
+      try {
+        playersSource = await readHtmlSource("players", playersUrl);
+      } catch (error) {
+        playersWarning = error.message;
+        const localPlayers = await readLocalHtmlSource("players");
+        if (localPlayers) playersSource = localPlayers;
+      }
 
       const parsedMatches = parseMatchesHtml(matchesSource.html);
-      const parsedPlayers = parsePlayersHtml(playersSource.html);
+      let parsedPlayers = parsePlayersHtml(playersSource.html);
+
+      if (!parsedPlayers.length && !config.useLocalHtml) {
+        const localPlayers = await readLocalHtmlSource("players");
+        if (localPlayers && localPlayers.source !== playersSource.source) {
+          parsedPlayers = parsePlayersHtml(localPlayers.html);
+          playersWarning = "Liste joueurs TS indisponible, clubs lus depuis data/players.html";
+        }
+      }
 
       if (parsedMatches.length || parsedPlayers.length) activateTournamentData();
       if (parsedPlayers.length) mergePlayers(parsedPlayers);
@@ -288,7 +331,7 @@ export function createTournamentState(config) {
         source: parsedMatches.length || parsedPlayers.length ? "tournamentsoftware" : "simulation",
         status: "ok",
         lastSyncAt: nowIso(),
-        lastError: null
+        lastError: playersWarning
       };
       if (reason === "manual") log("Synchro manuelle effectuée.");
     } catch (error) {
