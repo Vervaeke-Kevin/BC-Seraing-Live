@@ -2,7 +2,7 @@ import http from "node:http";
 import { readFile } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createTournamentState } from "./src/state.mjs";
+import { createTournamentState, APP_VERSION } from "./src/state.mjs";
 
 const root = fileURLToPath(new URL(".", import.meta.url));
 const publicDir = join(root, "public");
@@ -22,8 +22,19 @@ const contentTypes = {
   ".svg": "image/svg+xml"
 };
 
+function noCacheHeaders(extra = {}) {
+  return {
+    ...extra,
+    "cache-control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+    "pragma": "no-cache",
+    "expires": "0",
+    "surrogate-control": "no-store",
+    "x-bc-seraing-version": APP_VERSION
+  };
+}
+
 function sendJson(res, status, payload) {
-  res.writeHead(status, { "content-type": "application/json; charset=utf-8" });
+  res.writeHead(status, noCacheHeaders({ "content-type": "application/json; charset=utf-8" }));
   res.end(JSON.stringify(payload));
 }
 
@@ -47,12 +58,12 @@ async function serveStatic(req, res) {
 
   try {
     const body = await readFile(filePath);
-    res.writeHead(200, { "content-type": contentTypes[extname(filePath)] || "application/octet-stream" });
+    res.writeHead(200, noCacheHeaders({ "content-type": contentTypes[extname(filePath)] || "application/octet-stream" }));
     res.end(body);
   } catch {
     if (!extname(filePath)) {
       const body = await readFile(join(publicDir, "index.html"));
-      res.writeHead(200, { "content-type": contentTypes[".html"] });
+      res.writeHead(200, noCacheHeaders({ "content-type": contentTypes[".html"] }));
       res.end(body);
       return;
     }

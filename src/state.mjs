@@ -1,12 +1,16 @@
 import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
+import { readFileSync } from "node:fs";
 import { completedMatches, liveCourts, players, upcomingMatches, WARMUP_SECONDS } from "./simulation.mjs";
 import { parseMatchDates, parseMatchesHtml, parsePlayersHtml } from "./tournamentsoftware.mjs";
 
 function nowIso() {
   return new Date().toISOString();
 }
+
+const packageJson = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
+export const APP_VERSION = packageJson.version;
 
 function secondsNow() {
   return Math.floor(Date.now() / 1000);
@@ -26,9 +30,21 @@ function dateToOrder(dateKey = "") {
 }
 
 function minutesToTime(total) {
-  const hours = String(Math.floor(total / 60)).padStart(2, "0");
-  const minutes = String(total % 60).padStart(2, "0");
+  const dayMinutes = ((total % 1440) + 1440) % 1440;
+  const hours = String(Math.floor(dayMinutes / 60)).padStart(2, "0");
+  const minutes = String(dayMinutes % 60).padStart(2, "0");
   return `${hours}:${minutes}`;
+}
+
+function dateKeyToDayOffset(dateKey = "") {
+  if (!/^\d{8}$/.test(dateKey)) return 0;
+  const base = Date.UTC(2026, 5, 27);
+  const date = Date.UTC(Number(dateKey.slice(0, 4)), Number(dateKey.slice(4, 6)) - 1, Number(dateKey.slice(6, 8)));
+  return Math.round((date - base) / 86400000);
+}
+
+function matchAbsoluteMinutes(match) {
+  return dateKeyToDayOffset(match.dateKey) * 1440 + timeToMinutes(match.time || "00:00");
 }
 
 function clone(value) {
@@ -260,7 +276,9 @@ export function createTournamentState(config) {
       players: match.players,
       winners: match.winners || [],
       score: match.score || "",
-      duration: 0
+      duration: 0,
+      endedAtIso: nowIso(),
+      detectedAtSeconds: secondsNow()
     });
   }
 
@@ -310,7 +328,7 @@ export function createTournamentState(config) {
     finished.forEach(match => {
       const court = state.courts.find(item => item.playersText === match.playersText || (match.court && item.court === match.court));
       if (court && !court.free) {
-        finishCourt(court.court, "tournamentsoftware", match.score);
+        finishCourt(court.court, "tournamentsoftware", match.score, match);
       } else {
         addCompletedMatch(match);
       }
@@ -403,7 +421,7 @@ export function createTournamentState(config) {
     log(`Terrain ${court.court} : échauffement relancé.`);
   }
 
-  function finishCourt(courtNumber, source = "manual", score = "") {
+  function finishCourt(courtNumber, source = "manual", score = "", matchDetails = null) {
     const court = state.courts.find(item => item.court === Number(courtNumber));
     if (!court || court.free) return;
     const duration = court.matchStartedAt ? Math.max(1, Math.round((secondsNow() - court.matchStartedAt) / 60)) : null;
@@ -412,14 +430,16 @@ export function createTournamentState(config) {
       state.completedMatches.unshift({
         id: `live-${Date.now()}`,
         endedAt: toClock(),
-        draw: court.draw,
-        round: court.round,
-        type: court.players.length > 2 ? "double" : "simple",
-        playersText: court.playersText,
-        players: court.players,
-        winners: [],
+        draw: matchDetails?.draw || court.draw,
+        round: matchDetails?.round || court.round,
+        type: matchDetails ? matchType(matchDetails) : (court.players.length > 2 ? "double" : "simple"),
+        playersText: matchDetails?.playersText || court.playersText,
+        players: matchDetails?.players || court.players,
+        winners: matchDetails?.winners || [],
         score,
-        duration: duration || 0
+        duration: duration || 0,
+        endedAtIso: nowIso(),
+        detectedAtSeconds: secondsNow()
       });
     }
 
@@ -442,8 +462,10 @@ export function createTournamentState(config) {
   function buildRestMap() {
     const rest = new Map();
     state.completedMatches.forEach(match => {
-      if (!match.endedAt || !match.type || (match.duration || 0) <= 0) return;
-      const until = timeToMinutes(match.endedAt) + restMinutesFor(match.type);
+      if (!match.endedAt || !match.type) return;
+      const detected = match.detectedAtSeconds ? new Date(match.detectedAtSeconds * 1000) : null;
+      const dayOffset = detected ? dateKeyToDayOffset(`${detected.getUTCFullYear()}${String(detected.getUTCMonth() + 1).padStart(2, "0")}${String(detected.getUTCDate()).padStart(2, "0")}`) : 0;
+      const until = dayOffset * 1440 + timeToMinutes(match.endedAt) + restMinutesFor(match.type);
       match.players.forEach(player => {
         const existing = rest.get(player);
         if (!existing || until > existing.restUntil) {
@@ -462,6 +484,7 @@ export function createTournamentState(config) {
     const clubsByPlayer = playerClubMap();
 
     return {
+      version: APP_VERSION,
       sync: { ...state.sync },
       now: {
         iso: nowIso(),
@@ -493,7 +516,7 @@ export function createTournamentState(config) {
               player,
               restUntil: item.restUntil,
               restUntilText: minutesToTime(item.restUntil),
-              blocked: item.restUntil > timeToMinutes(match.time)
+              blocked: item.restUntil > matchAbsoluteMinutes(match)
             };
           })
           .filter(Boolean)

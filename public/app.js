@@ -55,11 +55,13 @@ function renderShell() {
   $("pageTitle").textContent = titles[page];
   const occupied = appState.courts.filter(court => court.status !== "free").length;
   const updatedAt = appState.sync.lastSyncAt ? new Date(appState.sync.lastSyncAt).toLocaleTimeString("fr-BE", { hour: "2-digit", minute: "2-digit" }) : "--:--";
-  $("syncStatus").textContent = `Terrains occupés ${occupied}/12 · mise à jour ${updatedAt}${appState.sync.lastError ? ` · ${appState.sync.lastError}` : ""}`;
+  $("syncStatus").textContent = `v${appState.version || "dev"} · Terrains occupés ${occupied}/12 · mise à jour ${updatedAt}${appState.sync.lastError ? ` · ${appState.sync.lastError}` : ""}`;
 
   Object.entries(pages).forEach(([key, el]) => el.classList.toggle("hidden", key !== page));
   document.querySelectorAll("[data-page]").forEach(button => button.classList.toggle("active", button.dataset.page === page));
   $("modeLabel").textContent = mode === "orga" ? "Organisateur" : "Public";
+  const footerVersion = $("versionFooter");
+  if (footerVersion) footerVersion.textContent = `v${appState.version || "dev"}`;
   $("syncNow").classList.toggle("orgaOnly", mode !== "orga");
 }
 
@@ -180,6 +182,23 @@ function renderTimeLeaders(players, title) {
   return `<table><thead><tr><th>#</th><th>${title}</th><th>Temps</th></tr></thead><tbody>${filtered.map((p, i) => `<tr><td><strong>${i + 1}</strong></td><td>${escapeHtml(p.player)}</td><td><strong>${p.total}'</strong></td></tr>`).join("")}</tbody></table>`;
 }
 
+function matchesByDay(matches) {
+  const days = [
+    ["20260627", "Samedi 27 juin 2026"],
+    ["20260628", "Dimanche 28 juin 2026"]
+  ];
+  return days.map(([dateKey, label]) => ({
+    dateKey,
+    label,
+    matches: matches.filter(match => match.dateKey === dateKey || (!match.dateKey && dateKey === "20260627"))
+  }));
+}
+
+function renderPlayerDayTabs(upcoming) {
+  const days = matchesByDay(upcoming);
+  return `<div class="dayTabs">${days.map((day, index) => `<section class="dayTab"><h3>${day.label}</h3>${day.matches.length ? day.matches.map(match => `<article class="nextMatch"><div class="matchTime"><span>${escapeHtml(match.dateLabel || day.label)}</span>${escapeHtml(match.time)}</div><div><div class="draw">${escapeHtml(match.draw)} · ${escapeHtml(match.round)}</div><div class="nextPlayers">${escapeHtml(match.playersText)}</div><div class="chips">${match.rest?.some(item => item.blocked) ? `<span class="badge rest">Repos à respecter</span>` : `<span class="badge playing">appel possible</span>`}</div></div></article>`).join("") : `<div class="empty">Aucun match ${index === 0 ? "samedi" : "dimanche"}.</div>`}</section>`).join("")}</div>`;
+}
+
 function nutritionAdvice(player) {
   const next = appState.upcomingMatches.find(match => match.players.includes(player));
   if (!next) return ["Recharge récupération", "Plus de match détecté : hydrate-toi, mange tranquillement et profite de la bonne bouffe du tournoi."];
@@ -221,7 +240,7 @@ function renderPlayer() {
       </aside>
       <div>
         <div class="nutrition"><strong>Coin ravito · ${nutTitle}</strong><p>${nutText}</p></div>
-        <div class="panel"><h2>Prochain match</h2>${next ? `<article class="nextMatch"><div class="matchTime">${next.time}</div><div><div class="draw">${escapeHtml(next.draw)} · ${escapeHtml(next.round)}</div><div class="nextPlayers">${escapeHtml(next.playersText)}</div></div></article>` : `<div class="empty">Aucun prochain match.</div>`}</div>
+        <div class="panel"><h2>Prochains matchs</h2>${renderPlayerDayTabs(upcoming)}</div>
         <div class="panel" style="margin-top:14px"><h2>Résultats</h2>${table(completed)}</div>
       </div>
     </section>

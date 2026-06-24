@@ -1,4 +1,4 @@
-function decodeHtml(value) {
+function decodeHtml(value = "") {
   return value
     .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
     .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)))
@@ -12,15 +12,12 @@ function decodeHtml(value) {
     .trim();
 }
 
-function stripTags(html) {
+function stripTags(html = "") {
   return decodeHtml(html.replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ").replace(/<[^>]+>/g, " "));
 }
 
 function splitBlocks(html, marker) {
-  return html
-    .split(marker)
-    .slice(1)
-    .map(part => marker + part);
+  return html.split(marker).slice(1).map(part => marker + part);
 }
 
 function splitListItemBlocks(html, className) {
@@ -39,11 +36,22 @@ function extractCourt(rowText) {
   return court ? Number(court[1]) : null;
 }
 
-function extractScore(text, block = "") {
-  const score = text.match(/\b\d{1,2}-\d{1,2}(?:\s+\d{1,2}-\d{1,2}){0,2}\b/);
-  if (score) return score[0];
-  if (/\b(w-?o|walkover|forfait)\b/i.test(text) || /match__message">\s*Walkover/i.test(block)) return "WO";
-  return "";
+function normalizeSetScore(score) {
+  return score.replace(/[–—]/g, "-").replace(/\s*-\s*/g, "-").trim();
+}
+
+export function extractScore(text, block = "") {
+  const scoreAreas = [...block.matchAll(/<div\b[^>]*class=["'][^"']*\bmatch__(?:result|score|sets?)\b[^"']*["'][^>]*>([\s\S]*?)<\/div>/gi)]
+    .map(match => stripTags(match[1]))
+    .join(" ");
+  const source = scoreAreas || text;
+  if (/\b(w-?o|walkover|forfait)\b/i.test(source) || /match__message[\s\S]*?>\s*(?:Walkover|Forfait)/i.test(block)) return "WO";
+  const sets = [...source.matchAll(/\b\d{1,2}\s*[-–—]\s*\d{1,2}\b/g)].map(match => normalizeSetScore(match[0]));
+  const plausible = sets.filter(set => {
+    const [a, b] = set.split("-").map(Number);
+    return Math.max(a, b) >= 11 && Math.max(a, b) <= 30 && Math.min(a, b) >= 0;
+  });
+  return plausible.slice(0, 3).join(" ");
 }
 
 function normalizeMatchPlayerName(name) {
@@ -54,10 +62,10 @@ function normalizeMatchPlayerName(name) {
 }
 
 function extractPlayersFromMatch(block) {
-  const rowStarts = [...block.matchAll(/<div class="match__row(?:\s| has-won)[^"]*">/gi)].map(match => match.index);
+  const rowStarts = [...block.matchAll(/<div\b[^>]*class=["'][^"']*\bmatch__row\b[^"']*["'][^>]*>/gi)].map(match => match.index);
   const rows = rowStarts.map((start, index) => block.slice(start, rowStarts[index + 1] ?? block.length));
   const rowItems = rows.map(row => {
-    const players = [...row.matchAll(/data-player-id="[^"]+"[\s\S]*?<span class="nav-link__value">([\s\S]*?)<\/span>/gi)]
+    const players = [...row.matchAll(/data-player-id=["'][^"']+["'][\s\S]*?<span\b[^>]*class=["'][^"']*\bnav-link__value\b[^"']*["'][^>]*>([\s\S]*?)<\/span>/gi)]
       .map(match => normalizeMatchPlayerName(match[1]))
       .filter(Boolean);
     return { players, won: /\bhas-won\b/i.test(row) };
@@ -79,56 +87,50 @@ function normalizePlayerName(name) {
 }
 
 function parseMatchBlock(block, time = "", options = {}) {
-    const matchBlock = block.split(/<\/div>\s*<\/li>\s*<li class="match-group__item">/i)[0];
-    const text = stripTags(matchBlock);
-    const active = /\b(Nu bezig|En cours|Now playing)\b/i.test(text);
-    const score = extractScore(text, matchBlock);
-    const court = extractCourt(text);
+  const matchBlock = block.split(/<\/div>\s*<\/li>\s*<li class="match-group__item">/i)[0];
+  const text = stripTags(matchBlock);
+  const active = /\b(Nu bezig|En cours|Now playing)\b/i.test(text);
+  const score = extractScore(text, matchBlock);
+  const court = extractCourt(text);
 
-    const header = matchBlock.match(/<div class="match__header">([\s\S]*?)<div class="match__body">/i)?.[1] || "";
-    const [draw = "", round = ""] = valuesIn(header).filter(value => value !== "Nu bezig");
-    const { playersText, players, winners } = extractPlayersFromMatch(matchBlock);
-    if (!players.length && !draw) return null;
+  const header = matchBlock.match(/<div\b[^>]*class=["'][^"']*\bmatch__header\b[^"']*["'][^>]*>([\s\S]*?)<div\b[^>]*class=["'][^"']*\bmatch__body\b/i)?.[1] || "";
+  const [draw = "", round = ""] = valuesIn(header).filter(value => !/^(Nu bezig|En cours|Now playing)$/i.test(value));
+  const { playersText, players, winners } = extractPlayersFromMatch(matchBlock);
+  if (!players.length && !draw) return null;
 
-    return {
-      id: `${draw}-${round}-${playersText}`.slice(0, 120),
-      time,
-      dateKey: options.dateKey || "",
-      dateLabel: options.dateLabel || "",
-      court,
-      status: active ? "active" : score ? "finished" : "scheduled",
-      score,
-      playersText,
-      players,
-      winners,
-      draw,
-      round,
-      raw: text
-    };
+  return {
+    id: `${options.dateKey || ""}-${draw}-${round}-${playersText}`.slice(0, 140),
+    time,
+    dateKey: options.dateKey || "",
+    dateLabel: options.dateLabel || "",
+    court,
+    status: active ? "active" : score ? "finished" : "scheduled",
+    score,
+    playersText,
+    players,
+    winners,
+    draw,
+    round,
+    raw: text
+  };
 }
 
 export function parseMatchDates(html) {
   const dates = [];
   const seen = new Set();
-
   for (const match of html.matchAll(/<a\b[^>]*href=["'][^"']*\/matches\/(\d{8})[^"']*["'][^>]*>([\s\S]*?)<\/a>/gi)) {
     const dateKey = match[1];
     if (seen.has(dateKey)) continue;
     seen.add(dateKey);
-    dates.push({
-      dateKey,
-      dateLabel: stripTags(match[2])
-    });
+    dates.push({ dateKey, dateLabel: stripTags(match[2]) });
   }
-
   return dates;
 }
 
 export function parseMatchesHtml(html, options = {}) {
   const matches = [];
-  const sectionRegex = /<h5 class="[^"]*match-group__header[^"]*"[^>]*>\s*([0-9]{1,2}:[0-9]{2})\s*<\/h5>/gi;
+  const sectionRegex = /<h5\b[^>]*class="[^"]*match-group__header[^"]*"[^>]*>\s*([0-9]{1,2}:[0-9]{2})\s*<\/h5>/gi;
   const sections = [...html.matchAll(sectionRegex)];
-
   if (!sections.length) {
     for (const block of splitBlocks(html, '<div class="match match--list">')) {
       const match = parseMatchBlock(block, "", options);
@@ -136,7 +138,6 @@ export function parseMatchesHtml(html, options = {}) {
     }
     return matches;
   }
-
   sections.forEach((section, index) => {
     const time = section[1];
     const start = section.index + section[0].length;
@@ -147,13 +148,11 @@ export function parseMatchesHtml(html, options = {}) {
       if (match) matches.push(match);
     }
   });
-
   return matches;
 }
 
 export function parsePlayersHtml(html) {
   const players = [];
-
   for (const block of splitListItemBlocks(html, "js-alphabet-list-item")) {
     const title = block.match(/<h5\b[^>]*class=["'][^"']*\bmedia__title\b[^"']*["'][^>]*>([\s\S]*?)<\/h5>/i)?.[1] || "";
     const subinfo = block.match(/<div\b[^>]*class=["'][^"']*\bmedia__content-subinfo\b[^"']*["'][^>]*>([\s\S]*?)<\/div>/i)?.[1] || "";
@@ -163,6 +162,5 @@ export function parsePlayersHtml(html) {
     if (!name || !club) continue;
     players.push({ name, club, gender: "" });
   }
-
   return players;
 }
