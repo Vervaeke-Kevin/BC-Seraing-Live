@@ -81,6 +81,11 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    if (req.method === "GET" && url.pathname === "/api/debug/ts-results") {
+      sendJson(res, 200, await state.getTsResultsDebug());
+      return;
+    }
+
     if (req.method === "POST" && url.pathname === "/api/sync/now") {
       await state.syncNow("manual");
       sendJson(res, 200, state.getPublicState());

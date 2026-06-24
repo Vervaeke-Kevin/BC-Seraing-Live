@@ -40,8 +40,14 @@ function extractCourt(rowText) {
 }
 
 function extractScore(text, block = "") {
-  const scores = [...text.matchAll(/\b\d{1,2}\s*[-–]\s*\d{1,2}\b/g)].map(match => match[0].replace(/\s*[–-]\s*/g, "-"));
-  if (scores.length) return scores.slice(0, 3).join(" ");
+  const scoreText = [
+    ...[...block.matchAll(/<div\b[^>]*class=["'][^"']*\bmatch__(?:score|result)\b[^"']*["'][^>]*>([\s\S]*?)<\/div>/gi)].map(match => stripTags(match[1])),
+    text
+  ].join(" ");
+  const scores = [...scoreText.matchAll(/\b(?:[0-3]?\d)\s*([-–—−:])\s*(?:[0-3]?\d)\b/g)]
+    .filter(match => match[1] !== ":" || Number(match[0].split(":")[0].trim()) > 20)
+    .map(match => match[0].replace(/\s*[-–—−:]\s*/g, "-"));
+  if (scores.length) return [...new Set(scores)].slice(0, 3).join(" ");
   if (/\b(w\s*[-/]?\s*o|walk\s*over|forfait)\b/i.test(text) || /match__message[^"]*">\s*(?:Walkover|Forfait|WO)/i.test(block)) return "WO";
   return "";
 }
@@ -111,17 +117,72 @@ export function parseMatchDates(html) {
   const dates = [];
   const seen = new Set();
 
-  for (const match of html.matchAll(/<a\b[^>]*href=["'][^"']*\/matches\/(\d{8})[^"']*["'][^>]*>([\s\S]*?)<\/a>/gi)) {
-    const dateKey = match[1];
+  for (const match of html.matchAll(/<a\b([^>]*\/matches\/(\d{8})[^>]*)>([\s\S]*?)<\/a>/gi)) {
+    const dateKey = match[2];
     if (seen.has(dateKey)) continue;
     seen.add(dateKey);
+    const dataLabel = match[1].match(/\bdata-topbar-subheading=["']([^"']+)["']/i)?.[1];
     dates.push({
       dateKey,
-      dateLabel: stripTags(match[2])
+      dateLabel: stripTags(dataLabel || match[3])
     });
   }
 
+  for (const match of html.matchAll(/\b(zaterdag|zondag)\s+(\d{1,2})\s+([a-zéû]+)\s+(\d{4})\b/gi)) {
+    const month = {
+      januari: "01", februari: "02", maart: "03", april: "04", mei: "05", juni: "06",
+      juli: "07", augustus: "08", september: "09", oktober: "10", november: "11", december: "12"
+    }[match[3].toLowerCase()];
+    if (!month) continue;
+    const dateKey = `${match[4]}${month}${String(Number(match[2])).padStart(2, "0")}`;
+    if (seen.has(dateKey)) continue;
+    seen.add(dateKey);
+    dates.push({ dateKey, dateLabel: match[0] });
+  }
+
   return dates;
+}
+
+function classNamesFor(fragment, classPrefix) {
+  return [...fragment.matchAll(/class=["']([^"']+)["']/gi)]
+    .flatMap(match => match[1].split(/\s+/))
+    .filter(className => className.startsWith(classPrefix));
+}
+
+export function diagnoseTsResultsHtml(html, options = {}) {
+  const matches = parseMatchesHtml(html, options);
+  const blocks = splitBlocks(html, '<div class="match match--list">');
+  const scoreContainers = [...html.matchAll(/<[^>]+class=["'][^"']*\bmatch__(?:score|result)\b[^"']*["'][^>]*>([\s\S]*?)<\/[^>]+>/gi)]
+    .map(match => stripTags(match[1]))
+    .filter(Boolean);
+  const messageContainers = [...html.matchAll(/<[^>]+class=["'][^"']*\bmatch__message\b[^"']*["'][^>]*>([\s\S]*?)<\/[^>]+>/gi)]
+    .map(match => stripTags(match[1]))
+    .filter(Boolean);
+
+  return {
+    source: options.source || "",
+    dateKey: options.dateKey || "",
+    dateLabel: options.dateLabel || "",
+    dates: parseMatchDates(html),
+    counts: {
+      matchBlocks: blocks.length,
+      parsedMatches: matches.length,
+      finishedMatches: matches.filter(match => match.status === "finished").length,
+      scoreContainers: scoreContainers.length,
+      messageContainers: messageContainers.length
+    },
+    scoreClasses: [...new Set(classNamesFor(html, "match__").filter(className => /score|result|message|status/.test(className)))].sort(),
+    scoreSamples: scoreContainers.slice(0, 10),
+    messageSamples: messageContainers.slice(0, 10),
+    parsedScoreSamples: matches.filter(match => match.score).slice(0, 10).map(match => ({
+      time: match.time,
+      draw: match.draw,
+      round: match.round,
+      playersText: match.playersText,
+      score: match.score,
+      status: match.status
+    }))
+  };
 }
 
 export function parseMatchesHtml(html, options = {}) {

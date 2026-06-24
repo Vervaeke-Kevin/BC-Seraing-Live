@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { completedMatches, liveCourts, players, upcomingMatches, WARMUP_SECONDS } from "./simulation.mjs";
-import { parseMatchDates, parseMatchesHtml, parsePlayersHtml } from "./tournamentsoftware.mjs";
+import { diagnoseTsResultsHtml, parseMatchDates, parseMatchesHtml, parsePlayersHtml } from "./tournamentsoftware.mjs";
 
 export const APP_VERSION = "0.2.0";
 
@@ -385,6 +385,22 @@ export function createTournamentState(config) {
     }
   }
 
+  async function getTsResultsDebug() {
+    const matchesUrl = `${config.tournamentUrl}/matches`;
+    const matchSources = await readMatchSources(matchesUrl);
+    const diagnostics = matchSources.map(source => diagnoseTsResultsHtml(source.html, {
+      source: source.source,
+      dateKey: source.dateKey || "",
+      dateLabel: source.dateLabel || ""
+    }));
+    return {
+      generatedAt: nowIso(),
+      tournamentUrl: config.tournamentUrl,
+      useLocalHtml: config.useLocalHtml,
+      sources: diagnostics
+    };
+  }
+
   function startAutoSync() {
     if (state.timer) clearInterval(state.timer);
     state.timer = setInterval(() => syncNow("auto"), config.syncIntervalMs);
@@ -509,6 +525,7 @@ export function createTournamentState(config) {
 
   return {
     getPublicState,
+    getTsResultsDebug,
     syncNow,
     startAutoSync,
     markMatchStarted,
