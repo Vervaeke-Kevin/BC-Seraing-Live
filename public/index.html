@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BC Seraing Live</title>
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/info.css">
 </head>
 <body>
   <div class="app">
@@ -32,31 +33,16 @@
     <main id="courtsView" class="view">
       <section id="summary" class="summary"></section>
       <section id="courts" class="courts"></section>
-      <section class="panel">
-        <h2>Dernières actions</h2>
-        <div id="eventLog" class="log"></div>
-      </section>
+      <section class="panel"><h2>Dernières actions</h2><div id="eventLog" class="log"></div></section>
     </main>
 
     <main id="nextView" class="view hidden">
-      <section class="toolbar">
-        <div><h2>Liste des prochains matchs</h2></div>
-        <div class="toolbarRight">
-          <button id="clubFilterNext">Par club</button>
-          <select id="clubSelectNext"></select>
-        </div>
-      </section>
+      <section class="toolbar"><div><h2>Liste des prochains matchs</h2></div><div class="toolbarRight"><button id="clubFilterNext">Par club</button><select id="clubSelectNext"></select></div></section>
       <section id="nextMatches" class="list"></section>
     </main>
 
     <main id="tournamentView" class="view hidden">
-      <section class="toolbar">
-        <div><h2>Vue tournoi</h2></div>
-        <div class="toolbarRight">
-          <button id="clubFilterTournament">Par club</button>
-          <select id="clubSelectTournament"></select>
-        </div>
-      </section>
+      <section class="toolbar"><div><h2>Vue tournoi</h2></div><div class="toolbarRight"><button id="clubFilterTournament">Par club</button><select id="clubSelectTournament"></select></div></section>
       <section class="grid2">
         <div class="panel"><h2>Derniers résultats</h2><div id="recentResults" class="list"></div></div>
         <div class="panel"><h2>Le marathon des matchs</h2><div id="longest"></div></div>
@@ -67,10 +53,7 @@
     </main>
 
     <main id="playerView" class="view hidden">
-      <section class="toolbar">
-        <div><h2>Fiche joueur</h2></div>
-        <select id="playerSelect" class="wideSelect"></select>
-      </section>
+      <section class="toolbar"><div><h2>Fiche joueur</h2></div><select id="playerSelect" class="wideSelect"></select></section>
       <section id="playerProfile"></section>
     </main>
 
@@ -78,16 +61,10 @@
       <section class="infoLayout">
         <div class="panel rewardsPanel">
           <div class="sectionHead">
-            <div>
-              <h2>Récompenses du tournoi</h2>
-              <p>Les montants des doubles et mixtes sont attribués à la paire, et non à chaque joueur.</p>
-            </div>
+            <div><h2>Récompenses du tournoi</h2><p>Les montants des doubles et mixtes sont attribués à la paire, et non à chaque joueur.</p></div>
             <div class="rewardTotal"><span>Dotation totale</span><strong>2 740 €</strong></div>
           </div>
-          <div class="rewardNotes">
-            <span>Bons « Squash 22 » valorisés à 25 € par bon.</span>
-            <span>Les autres bons sont offerts chez Full Badminton.</span>
-          </div>
+          <div class="rewardNotes"><span>Bons « Squash 22 » valorisés à 25 € par bon.</span><span>Les autres bons sont offerts chez Full Badminton.</span></div>
           <div class="tableScroll">
             <table class="rewardsTable">
               <thead><tr><th>Tableau</th><th>Vainqueur</th><th>Finaliste</th><th>3e et 4e</th></tr></thead>
@@ -123,30 +100,16 @@
         </div>
 
         <div class="panel partnersPanel">
-          <div class="sectionHead">
-            <div>
-              <h2>Nos partenaires</h2>
-              <p>Merci aux organisations qui soutiennent le tournoi et ses joueurs.</p>
-            </div>
-          </div>
+          <div class="sectionHead"><div><h2>Nos partenaires</h2><p>Merci aux organisations qui soutiennent le tournoi et ses joueurs.</p></div></div>
           <div class="partners">
-            <a class="partner partnerLfbb" href="https://www.lfbb.be/" target="_blank" rel="noopener noreferrer">
-              <span class="partnerLogo"><img src="/assets/lfbb-logo.svg" alt="Ligue Francophone Belge de Badminton"></span>
-              <span><strong>LFBB</strong><small>Fédération francophone</small></span>
-            </a>
-            <a class="partner partnerFull" href="https://www.fullbadminton.be/" target="_blank" rel="noopener noreferrer">
-              <span class="partnerLogo"><img src="/assets/full-badminton-logo.svg" alt="Full Badminton"></span>
-              <span><strong>Full Badminton</strong><small>Partenaire matériel et bons cadeaux</small></span>
-            </a>
+            <a class="partner partnerLfbb" href="https://www.lfbb.be/" target="_blank" rel="noopener noreferrer"><span class="partnerLogo"><img src="/assets/lfbb-logo.svg" alt="Ligue Francophone Belge de Badminton"></span><span><strong>LFBB</strong><small>Fédération francophone</small></span></a>
+            <a class="partner partnerFull" href="https://www.fullbadminton.be/" target="_blank" rel="noopener noreferrer"><span class="partnerLogo"><img src="/assets/full-badminton-logo.svg" alt="Full Badminton"></span><span><strong>Full Badminton</strong><small>Partenaire matériel et bons cadeaux</small></span></a>
           </div>
         </div>
       </section>
     </main>
 
-    <footer>
-      <span>© 2026 BC Seraing Badminton. Tous droits réservés.</span>
-      <span>Application tournoi conçue avec assistance IA · Données TournamentSoftware à vérifier · <span id="appVersion">version --</span>.</span>
-    </footer>
+    <footer><span>© 2026 BC Seraing Badminton. Tous droits réservés.</span><span>Application tournoi conçue avec assistance IA · Données TournamentSoftware à vérifier · <span id="appVersion">version --</span>.</span></footer>
   </div>
   <script src="/app.js" type="module"></script>
 </body>
