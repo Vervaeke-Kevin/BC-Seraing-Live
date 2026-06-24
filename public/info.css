@@ -1,0 +1,191 @@
+.clubLogo {
+  width: 86px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #000;
+  flex: 0 0 auto;
+}
+
+.infoLayout {
+  display: grid;
+  gap: 14px;
+}
+
+.sectionHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.sectionHead p {
+  max-width: 760px;
+  line-height: 1.45;
+}
+
+.rewardTotal {
+  min-width: 180px;
+  padding: 12px 14px;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  background: #eff8ff;
+  text-align: right;
+}
+
+.rewardTotal span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.rewardTotal strong {
+  display: block;
+  color: #0b3768;
+  font-size: 28px;
+  letter-spacing: -.04em;
+}
+
+.rewardNotes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.rewardNotes span {
+  padding: 7px 9px;
+  border-radius: 999px;
+  background: #eef4fb;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.tableScroll {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.rewardsTable {
+  min-width: 720px;
+  background: #fff;
+}
+
+.rewardsTable thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #0f172a;
+  color: #fff;
+  border-bottom: 0;
+}
+
+.rewardsTable tbody th {
+  color: #0f3768;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.rewardsTable tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.rewardsTable td,
+.rewardsTable tbody th {
+  padding: 10px 12px;
+}
+
+.partnersPanel {
+  border-top: 4px solid #0b3768;
+}
+
+.partners {
+  grid-template-columns: repeat(2, minmax(230px, 1fr));
+}
+
+.partner {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  align-items: center;
+  gap: 14px;
+  min-height: 118px;
+  padding: 14px;
+  color: var(--ink);
+  text-align: left;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.partner:hover,
+.partner:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  outline: none;
+}
+
+.partnerLfbb:hover,
+.partnerLfbb:focus-visible {
+  border-color: #d9004b;
+}
+
+.partnerFull:hover,
+.partnerFull:focus-visible {
+  border-color: #6cd4df;
+}
+
+.partner .partnerLogo {
+  width: 92px;
+  height: 86px;
+  margin: 0;
+  border: 0;
+  border-radius: 8px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+}
+
+.partnerLogo img {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+}
+
+.partner strong {
+  display: block;
+  color: #0f172a;
+  font-size: 18px;
+}
+
+.partner small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (max-width: 680px) {
+  .clubLogo {
+    width: 72px;
+    height: 52px;
+  }
+
+  .sectionHead {
+    flex-direction: column;
+  }
+
+  .rewardTotal {
+    width: 100%;
+    text-align: left;
+  }
+
+  .partners {
+    grid-template-columns: 1fr;
+  }
+}
