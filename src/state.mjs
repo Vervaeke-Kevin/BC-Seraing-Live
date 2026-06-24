@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { completedMatches, liveCourts, players, upcomingMatches, WARMUP_SECONDS } from "./simulation.mjs";
 import { diagnoseTsResultsHtml, parseMatchDates, parseMatchesHtml, parsePlayersHtml } from "./tournamentsoftware.mjs";
 
-export const APP_VERSION = "0.2.0";
+export const APP_VERSION = "0.3.0";
 
 function nowIso() {
   return new Date().toISOString();
@@ -262,24 +262,44 @@ export function createTournamentState(config) {
     if (scheduled.length) state.upcomingMatches = scheduled;
   }
 
-  function addCompletedMatch(match) {
+  function durationFromCourt(court, now = secondsNow()) {
+    if (!court || court.free) return null;
+    const startedAt = court.matchStartedAt || (court.warmupStartedAt ? court.warmupStartedAt + WARMUP_SECONDS : null);
+    if (!startedAt || now < startedAt) return null;
+    return Math.max(1, Math.round((now - startedAt) / 60));
+  }
+
+  function sameMatch(a, b) {
+    return matchKey(a) === matchKey(b) || (
+      normalizeTsIdentityPart(a.playersText) === normalizeTsIdentityPart(b.playersText) &&
+      normalizeTsIdentityPart(a.draw) === normalizeTsIdentityPart(b.draw) &&
+      normalizeTsIdentityPart(a.round) === normalizeTsIdentityPart(b.round)
+    );
+  }
+
+  function findCourtForFinishedMatch(match) {
+    return state.courts.find(court => !court.free && sameMatch(court, match));
+  }
+
+  function addCompletedMatch(match, activeCourt = null, now = secondsNow()) {
     const key = matchKey(match);
     const exists = state.completedMatches.some(item => item.tsKey === key);
-    if (exists) return;
+    if (exists) return false;
 
     state.completedMatches.unshift({
       id: `ts-${key}`.slice(0, 140),
       tsKey: key,
-      endedAt: toClock(),
-      draw: match.draw || "Tableau à confirmer",
-      round: match.round || "Tour à confirmer",
-      type: matchType(match),
-      playersText: match.playersText,
-      players: match.players,
+      endedAt: toClock(new Date(now * 1000)),
+      draw: match.draw || activeCourt?.draw || "Tableau à confirmer",
+      round: match.round || activeCourt?.round || "Tour à confirmer",
+      type: matchType(match.players?.length ? match : activeCourt),
+      playersText: match.playersText || activeCourt?.playersText || "",
+      players: match.players?.length ? match.players : activeCourt?.players || [],
       winners: match.winners || [],
       score: match.score || "",
-      duration: 0
+      duration: durationFromCourt(activeCourt, now)
     });
+    return true;
   }
 
   function mergeLiveMatches(parsedMatches) {
@@ -291,7 +311,12 @@ export function createTournamentState(config) {
 
     mergeUpcomingMatches(parsedMatches);
 
-    finished.forEach(match => addCompletedMatch(match));
+    const finishedCourts = new Map();
+    finished.forEach(match => {
+      const activeCourt = findCourtForFinishedMatch(match);
+      addCompletedMatch(match, activeCourt, now);
+      if (activeCourt) finishedCourts.set(activeCourt.court, activeCourt.tsKey || matchKey(activeCourt));
+    });
 
     const activeCourtNumbers = new Set(active.map(match => match.court));
 
@@ -320,7 +345,9 @@ export function createTournamentState(config) {
     });
 
     state.courts.forEach(court => {
-      if (!activeCourtNumbers.has(court.court) && !court.free) {
+      const finishedCourtKey = finishedCourts.get(court.court);
+      const currentCourtKey = court.tsKey || matchKey(court);
+      if ((!activeCourtNumbers.has(court.court) || finishedCourtKey === currentCourtKey) && !court.free) {
         court.free = true;
         court.matchStartedAt = null;
         court.playersText = "Terrain libre";
@@ -439,7 +466,8 @@ export function createTournamentState(config) {
   function finishCourt(courtNumber, source = "manual", score = "") {
     const court = state.courts.find(item => item.court === Number(courtNumber));
     if (!court || court.free) return;
-    const duration = court.matchStartedAt ? Math.max(1, Math.round((secondsNow() - court.matchStartedAt) / 60)) : null;
+    const now = secondsNow();
+    const duration = durationFromCourt(court, now);
 
     if (score) {
       const tsKey = court.tsKey || matchKey(court);
@@ -447,7 +475,7 @@ export function createTournamentState(config) {
         state.completedMatches.unshift({
           id: `live-${tsKey}`.slice(0, 140),
           tsKey,
-          endedAt: toClock(),
+          endedAt: toClock(new Date(now * 1000)),
           draw: court.draw,
           round: court.round,
           type: court.players.length > 2 ? "double" : "simple",
@@ -455,7 +483,7 @@ export function createTournamentState(config) {
           players: court.players,
           winners: [],
           score,
-          duration: duration || 0
+          duration
         });
       }
     }
@@ -466,7 +494,7 @@ export function createTournamentState(config) {
     court.players = [];
     court.draw = "Aucun match";
     court.round = "En attente";
-    court.warmupStartedAt = secondsNow();
+    court.warmupStartedAt = now;
     log(`${source === "tournamentsoftware" ? "TS" : "Orga"} : terrain ${court.court} libéré.`);
   }
 
@@ -479,7 +507,7 @@ export function createTournamentState(config) {
   function buildRestMap() {
     const rest = new Map();
     state.completedMatches.forEach(match => {
-      if (!match.endedAt || !match.type || (match.duration || 0) <= 0) return;
+      if (!match.endedAt || !match.type) return;
       const until = timeToMinutes(match.endedAt) + restMinutesFor(match.type);
       match.players.forEach(player => {
         const existing = rest.get(player);
