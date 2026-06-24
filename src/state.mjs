@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { completedMatches, liveCourts, players, upcomingMatches, WARMUP_SECONDS } from "./simulation.mjs";
 import { diagnoseTsResultsHtml, parseMatchDates, parseMatchesHtml, parsePlayersHtml } from "./tournamentsoftware.mjs";
 
-export const APP_VERSION = "0.3.0";
+export const APP_VERSION = "0.3.1";
 
 function nowIso() {
   return new Date().toISOString();
@@ -27,10 +27,25 @@ function dateToOrder(dateKey = "") {
   return Number(dateKey) || 0;
 }
 
-function minutesToTime(total) {
-  const hours = String(Math.floor(total / 60)).padStart(2, "0");
-  const minutes = String(total % 60).padStart(2, "0");
-  return `${hours}:${minutes}`;
+function formatClockIso(iso) {
+  if (!iso) return "";
+  return new Date(iso).toLocaleTimeString("fr-BE", { hour: "2-digit", minute: "2-digit" });
+}
+
+function dateKeyToIsoDate(dateKey = "") {
+  const match = String(dateKey).match(/^(\d{4})(\d{2})(\d{2})$/);
+  return match ? `${match[1]}-${match[2]}-${match[3]}` : "";
+}
+
+function dateKeyTimeToIso(dateKey = "", time = "") {
+  const isoDate = dateKeyToIsoDate(dateKey);
+  if (!isoDate || !/^\d{1,2}:\d{2}$/.test(time)) return "";
+  const [hours, minutes] = time.split(":").map(Number);
+  return new Date(Date.UTC(Number(isoDate.slice(0, 4)), Number(isoDate.slice(5, 7)) - 1, Number(isoDate.slice(8, 10)), hours, minutes, 0)).toISOString();
+}
+
+function addMinutesIso(iso, minutes) {
+  return new Date(new Date(iso).getTime() + minutes * 60000).toISOString();
 }
 
 function clone(value) {
@@ -78,7 +93,7 @@ function matchType(match) {
   return match.players.length > 2 ? "double" : "simple";
 }
 
-function normalizeTsIdentityPart(value = "") {
+export function normalizeTsIdentityPart(value = "") {
   return String(value)
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -290,6 +305,10 @@ export function createTournamentState(config) {
       id: `ts-${key}`.slice(0, 140),
       tsKey: key,
       endedAt: toClock(new Date(now * 1000)),
+      endedAtIso: new Date(now * 1000).toISOString(),
+      dateKey: match.dateKey || activeCourt?.dateKey || "",
+      time: match.time || activeCourt?.time || "",
+      restUntilIso: addMinutesIso(new Date(now * 1000).toISOString(), restMinutesFor(matchType(match.players?.length ? match : activeCourt))),
       draw: match.draw || activeCourt?.draw || "Tableau à confirmer",
       round: match.round || activeCourt?.round || "Tour à confirmer",
       type: matchType(match.players?.length ? match : activeCourt),
@@ -476,6 +495,10 @@ export function createTournamentState(config) {
           id: `live-${tsKey}`.slice(0, 140),
           tsKey,
           endedAt: toClock(new Date(now * 1000)),
+          endedAtIso: new Date(now * 1000).toISOString(),
+          dateKey: court.dateKey || "",
+          time: court.time || "",
+          restUntilIso: addMinutesIso(new Date(now * 1000).toISOString(), restMinutesFor(court.players.length > 2 ? "double" : "simple")),
           draw: court.draw,
           round: court.round,
           type: court.players.length > 2 ? "double" : "simple",
@@ -507,12 +530,14 @@ export function createTournamentState(config) {
   function buildRestMap() {
     const rest = new Map();
     state.completedMatches.forEach(match => {
-      if (!match.endedAt || !match.type) return;
-      const until = timeToMinutes(match.endedAt) + restMinutesFor(match.type);
+      const endedAtIso = match.endedAtIso || dateKeyTimeToIso(match.dateKey || new Date().toISOString().slice(0, 10).replaceAll("-", ""), match.endedAt);
+      if (!endedAtIso || !match.type) return;
+      const restUntilIso = match.restUntilIso || addMinutesIso(endedAtIso, restMinutesFor(match.type));
       match.players.forEach(player => {
-        const existing = rest.get(player);
-        if (!existing || until > existing.restUntil) {
-          rest.set(player, { restUntil: until, source: match });
+        const key = normalizeTsIdentityPart(player);
+        const existing = rest.get(key);
+        if (!existing || restUntilIso > existing.restUntilIso) {
+          rest.set(key, { restUntilIso, endedAtIso, source: match, sourcePlayer: player });
         }
       });
     });
@@ -553,13 +578,17 @@ export function createTournamentState(config) {
         ...match,
         rest: match.players
           .map(player => {
-            const item = restMap.get(player);
+            const item = restMap.get(normalizeTsIdentityPart(player));
             if (!item) return null;
+            const scheduledAtIso = dateKeyTimeToIso(match.dateKey, match.time);
             return {
               player,
-              restUntil: item.restUntil,
-              restUntilText: minutesToTime(item.restUntil),
-              blocked: item.restUntil > timeToMinutes(match.time)
+              sourcePlayer: item.sourcePlayer,
+              endedAtIso: item.endedAtIso,
+              restUntilIso: item.restUntilIso,
+              restUntilText: formatClockIso(item.restUntilIso),
+              blocked: item.restUntilIso > new Date(now * 1000).toISOString(),
+              scheduleConflict: scheduledAtIso ? item.restUntilIso > scheduledAtIso : false
             };
           })
           .filter(Boolean)

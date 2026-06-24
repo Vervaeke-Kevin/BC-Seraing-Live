@@ -167,3 +167,118 @@ test("les statistiques utilisent les durées TS calculées", (t) => {
   assert.equal(publicState.stats.exterminator[0].duration, 42);
   assert.equal(publicState.stats.menTime.find(item => item.player === "Yannick Küpper").total, 42);
 });
+
+test("un joueur reste affiché en repos deux minutes après un simple même si son prochain match est beaucoup plus tard", (t) => {
+  const endedAt = Date.UTC(2026, 5, 27, 10, 0, 0);
+  t.mock.method(Date, "now", () => endedAt);
+  const state = createTournamentState({ tournamentUrl: "http://example.test", syncIntervalMs: 60000, useLocalHtml: true });
+
+  state._mergeLiveMatchesForTest([finishedMatch({
+    time: "10:00",
+    playersText: "Alice Exemple vs Bob Exemple",
+    players: ["Alice Exemple", "Bob Exemple"]
+  }), {
+    ...activeMatch({
+      status: "scheduled",
+      time: "18:00",
+      playersText: "Alice Exemple vs Claire Exemple",
+      players: ["Alice Exemple", "Claire Exemple"]
+    }),
+    court: null
+  }]);
+
+  t.mock.method(Date, "now", () => endedAt + 2 * 60 * 1000);
+  const upcoming = state.getPublicState().upcomingMatches.find(item => item.players.includes("Alice Exemple"));
+  const rest = upcoming.rest.find(item => item.player === "Alice Exemple");
+  assert.equal(rest.blocked, true);
+  assert.equal(rest.scheduleConflict, false);
+  assert.equal(rest.endedAtIso, "2026-06-27T10:00:00.000Z");
+  assert.equal(rest.restUntilIso, "2026-06-27T10:30:00.000Z");
+  assert.equal(rest.restUntilText, "10:30");
+});
+
+test("un joueur reste affiché en repos deux minutes après un double même si son prochain match est beaucoup plus tard", (t) => {
+  const endedAt = Date.UTC(2026, 5, 27, 11, 0, 0);
+  t.mock.method(Date, "now", () => endedAt);
+  const state = createTournamentState({ tournamentUrl: "http://example.test", syncIntervalMs: 60000, useLocalHtml: true });
+
+  state._mergeLiveMatchesForTest([finishedMatch({
+    time: "11:00",
+    draw: "DM 12",
+    playersText: "Alice Exemple / Bob Exemple vs David Exemple / Eric Exemple",
+    players: ["Alice Exemple", "Bob Exemple", "David Exemple", "Eric Exemple"]
+  }), {
+    ...activeMatch({
+      status: "scheduled",
+      time: "19:00",
+      playersText: "Alice Exemple vs Claire Exemple",
+      players: ["Alice Exemple", "Claire Exemple"]
+    }),
+    court: null
+  }]);
+
+  t.mock.method(Date, "now", () => endedAt + 2 * 60 * 1000);
+  const upcoming = state.getPublicState().upcomingMatches.find(item => item.players.includes("Alice Exemple"));
+  const rest = upcoming.rest.find(item => item.player === "Alice Exemple");
+  assert.equal(rest.blocked, true);
+  assert.equal(rest.scheduleConflict, false);
+  assert.equal(rest.restUntilIso, "2026-06-27T11:15:00.000Z");
+  assert.equal(rest.restUntilText, "11:15");
+});
+
+test("le repos utilise la date complète lors du passage samedi dimanche", (t) => {
+  const endedAt = Date.UTC(2026, 5, 27, 23, 50, 0);
+  t.mock.method(Date, "now", () => endedAt);
+  const state = createTournamentState({ tournamentUrl: "http://example.test", syncIntervalMs: 60000, useLocalHtml: true });
+
+  state._mergeLiveMatchesForTest([finishedMatch({
+    dateKey: "20260627",
+    time: "23:50",
+    playersText: "Alice Exemple vs Bob Exemple",
+    players: ["Alice Exemple", "Bob Exemple"]
+  }), {
+    ...activeMatch({
+      status: "scheduled",
+      dateKey: "20260628",
+      time: "00:10",
+      playersText: "Alice Exemple vs Claire Exemple",
+      players: ["Alice Exemple", "Claire Exemple"]
+    }),
+    court: null
+  }]);
+
+  t.mock.method(Date, "now", () => Date.UTC(2026, 5, 28, 0, 5, 0));
+  const upcoming = state.getPublicState().upcomingMatches.find(item => item.players.includes("Alice Exemple"));
+  const rest = upcoming.rest.find(item => item.player === "Alice Exemple");
+  assert.equal(rest.blocked, true);
+  assert.equal(rest.scheduleConflict, true);
+  assert.equal(rest.restUntilIso, "2026-06-28T00:20:00.000Z");
+  assert.equal(rest.restUntilText, "00:20");
+});
+
+test("les différences mineures d'écriture du nom associent le repos au prochain match", (t) => {
+  const endedAt = Date.UTC(2026, 5, 27, 12, 0, 0);
+  t.mock.method(Date, "now", () => endedAt);
+  const state = createTournamentState({ tournamentUrl: "http://example.test", syncIntervalMs: 60000, useLocalHtml: true });
+
+  state._mergeLiveMatchesForTest([finishedMatch({
+    time: "12:00",
+    playersText: "Pierre Pieds-Ferrés vs Bob Exemple",
+    players: ["Pierre Pieds-Ferrés", "Bob Exemple"]
+  }), {
+    ...activeMatch({
+      status: "scheduled",
+      time: "12:45",
+      playersText: "Pierre Pieds-Ferres vs Claire Exemple",
+      players: ["Pierre Pieds-Ferres", "Claire Exemple"]
+    }),
+    court: null
+  }]);
+
+  t.mock.method(Date, "now", () => endedAt + 2 * 60 * 1000);
+  const upcoming = state.getPublicState().upcomingMatches.find(item => item.players.includes("Pierre Pieds-Ferres"));
+  const rest = upcoming.rest.find(item => item.player === "Pierre Pieds-Ferres");
+  assert.equal(rest.sourcePlayer, "Pierre Pieds-Ferrés");
+  assert.equal(rest.blocked, true);
+  assert.equal(rest.restUntilText, "12:30");
+});
