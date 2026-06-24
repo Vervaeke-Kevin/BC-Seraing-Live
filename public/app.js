@@ -29,6 +29,21 @@ const fmt = (seconds) => {
   return `${sign}${String(Math.floor(abs / 60)).padStart(2, "0")}:${String(abs % 60).padStart(2, "0")}`;
 };
 
+
+function normalizeName(value = "") {
+  return String(value).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+function playerInMatch(match, playerName) {
+  const key = normalizeName(playerName);
+  return match.players.some(player => normalizeName(player) === key);
+}
+
+function restForPlayer(match, playerName) {
+  const key = normalizeName(playerName);
+  return match.rest?.find(item => normalizeName(item.player) === key);
+}
+
 function escapeHtml(value = "") {
   return String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;" }[char]));
 }
@@ -120,7 +135,8 @@ function clubsForControls() {
 }
 
 function playerClub(player) {
-  return appState.players.find(item => item.name === player)?.club || "";
+  const key = normalizeName(player);
+  return appState.players.find(item => normalizeName(item.name) === key)?.club || "";
 }
 
 function matchForClub(match) {
@@ -142,14 +158,14 @@ function renderNext() {
   $("nextMatches").innerHTML = matches.length ? matches.map(match => {
     const blocked = match.rest.some(item => item.blocked);
     const blockedRest = match.rest.filter(item => item.blocked);
-    const notBefore = blockedRest.length ? blockedRest.reduce((max, item) => item.restUntil > max.restUntil ? item : max).restUntilText : "";
+    const notBefore = blockedRest.length ? blockedRest.reduce((max, item) => item.restUntilIso > max.restUntilIso ? item : max).restUntilText : "";
     return `
       <article class="nextMatch ${blocked ? "blocked" : ""}">
         <div class="matchTime"><span>${escapeHtml(match.dateLabel || "")}</span>${match.time}</div>
         <div>
           <div class="draw">${escapeHtml(match.draw)} · ${escapeHtml(match.round)}</div>
           <div class="nextPlayers">${highlightRest(match)}</div>
-          <div class="chips">${notBefore ? `<span class="badge rest">Pas avant ${notBefore}</span>` : ""}<span class="badge ${blocked ? "warmup" : "playing"}">${blocked ? "repos à respecter" : "appel possible"}</span></div>
+          <div class="chips">${notBefore ? `<span class="badge rest">Pas avant ${notBefore}</span>` : ""}<span class="badge ${blocked ? "warmup" : "playing"}">${blocked ? "repos à respecter" : "appel possible"}</span>${match.rest.some(item => item.scheduleConflict) ? `<span class="badge ready">conflit horaire</span>` : ""}</div>
         </div>
       </article>
     `;
@@ -173,7 +189,8 @@ function dayKey(match) {
 
 function playerMatchCard(match, kind) {
   const time = match.endedAt || match.time || "--:--";
-  const result = kind === "played" ? `<div class="score">${escapeHtml(match.score || "Résultat")}</div>` : `<div class="chips">${match.rest?.some(item => item.blocked) ? `<span class="badge rest">Pas avant ${match.rest.find(item => item.blocked).restUntilText}</span>` : `<span class="badge playing">à venir</span>`}</div>`;
+  const blockedRest = match.rest?.find(item => item.blocked);
+  const result = kind === "played" ? `<div class="score">${escapeHtml(match.score || "Résultat")}</div>` : `<div class="chips">${blockedRest ? `<span class="badge rest">En repos jusqu’à ${blockedRest.restUntilText}</span><span class="badge rest">Pas avant ${blockedRest.restUntilText}</span>` : `<span class="badge playing">à venir</span>`}${match.rest?.some(item => item.scheduleConflict) ? `<span class="badge ready">conflit horaire</span>` : ""}</div>`;
   return `<article class="nextMatch"><div class="matchTime"><span>${escapeHtml(match.dateLabel || kind)}</span>${escapeHtml(time)}</div><div><div class="draw">${escapeHtml(match.draw)} · ${escapeHtml(match.round)}</div><div class="nextPlayers">${escapeHtml(match.playersText)}</div>${result}</div></article>`;
 }
 
@@ -196,7 +213,7 @@ function renderTimeLeaders(players, title) {
 }
 
 function nutritionAdvice(player) {
-  const next = appState.upcomingMatches.find(match => match.players.includes(player));
+  const next = appState.upcomingMatches.find(match => playerInMatch(match, player));
   if (!next) return ["Recharge récupération", "Plus de match détecté : hydrate-toi, mange tranquillement et profite de la bonne bouffe du tournoi."];
   const now = new Date();
   const [h, m] = next.time.split(":").map(Number);
@@ -215,22 +232,25 @@ function renderPlayer() {
   $("playerSelect").value = selectedPlayer;
   const player = appState.players.find(p => p.name === selectedPlayer) || appState.players[0];
   if (!player) return;
-  const completed = appState.completedMatches.filter(match => match.players.includes(player.name));
-  const upcoming = appState.upcomingMatches.filter(match => match.players.includes(player.name));
+  const completed = appState.completedMatches.filter(match => playerInMatch(match, player.name));
+  const upcoming = appState.upcomingMatches.filter(match => playerInMatch(match, player.name));
   const allMatches = [
     ...upcoming.map(match => ({ ...match, kind: "upcoming" })),
     ...completed.map(match => ({ ...match, kind: "played" }))
   ].sort((a, b) => (a.dateKey || "").localeCompare(b.dateKey || "") || (a.time || a.endedAt || "").localeCompare(b.time || b.endedAt || ""));
   const dayMatches = allMatches.filter(match => dayKey(match) === selectedPlayerDay);
-  const wins = completed.filter(match => match.winners.includes(player.name)).length;
+  const wins = completed.filter(match => playerInMatch({ players: match.winners }, player.name)).length;
   const total = completed.reduce((sum, match) => sum + match.duration, 0);
   const [nutTitle, nutText] = nutritionAdvice(player.name);
   const next = upcoming[0];
+  const currentRest = next ? restForPlayer(next, player.name) : appState.upcomingMatches.flatMap(match => match.rest || []).find(item => normalizeName(item.player) === normalizeName(player.name) && item.blocked);
+  const restBadge = currentRest ? `<div class="badge rest">En repos jusqu’à ${currentRest.restUntilText}</div>` : "";
   $("playerProfile").innerHTML = `
     <section class="playerGrid">
       <aside class="panel">
         <div class="avatar">${player.name.split(" ").map(p => p[0]).join("").slice(0, 2).toUpperCase()}</div>
         <div class="playerName">${escapeHtml(player.name)}</div>
+        ${restBadge}
         <div class="playerClub">${escapeHtml(player.club || "Club non renseigné")}</div>
         <div class="playerStats">
           <div class="playerStat"><span>Bilan</span><strong>${wins}V / ${completed.length - wins}D</strong></div>
@@ -241,7 +261,7 @@ function renderPlayer() {
       </aside>
       <div>
         <div class="nutrition"><strong>Coin ravito · ${nutTitle}</strong><p>${nutText}</p></div>
-        <div class="panel"><h2>Prochain match</h2>${next ? `<article class="nextMatch"><div class="matchTime">${next.time}</div><div><div class="draw">${escapeHtml(next.draw)} · ${escapeHtml(next.round)}</div><div class="nextPlayers">${escapeHtml(next.playersText)}</div></div></article>` : `<div class="empty">Aucun prochain match.</div>`}</div>
+        <div class="panel"><h2>Prochain match</h2>${next ? `<article class="nextMatch"><div class="matchTime">${next.time}</div><div><div class="draw">${escapeHtml(next.draw)} · ${escapeHtml(next.round)}</div><div class="nextPlayers">${escapeHtml(next.playersText)}</div><div class="chips">${restForPlayer(next, player.name)?.blocked ? `<span class="badge rest">En repos jusqu’à ${restForPlayer(next, player.name).restUntilText}</span><span class="badge rest">Pas avant ${restForPlayer(next, player.name).restUntilText}</span>` : `<span class="badge playing">à venir</span>`}${restForPlayer(next, player.name)?.scheduleConflict ? `<span class="badge ready">conflit horaire</span>` : ""}</div></div></article>` : `<div class="empty">Aucun prochain match.</div>`}</div>
         <div class="panel" style="margin-top:14px"><h2>Tous les matchs</h2><div class="dayTabs"><button data-player-day="samedi" class="${selectedPlayerDay === "samedi" ? "active" : ""}">Samedi</button><button data-player-day="dimanche" class="${selectedPlayerDay === "dimanche" ? "active" : ""}">Dimanche</button></div><div class="list">${dayMatches.length ? dayMatches.map(match => playerMatchCard(match, match.kind)).join("") : `<div class="empty">Aucun match ${selectedPlayerDay}.</div>`}</div></div>
       </div>
     </section>
