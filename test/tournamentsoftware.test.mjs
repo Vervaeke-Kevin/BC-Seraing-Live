@@ -70,3 +70,40 @@ test("diagnostique la structure réelle des résultats TS", () => {
   assert.deepEqual(diagnostic.scoreSamples, ["21-16", "21-17"]);
   assert.equal(diagnostic.parsedScoreSamples[0].score, "21-16 21-17");
 });
+
+test("reconnaît T01, T1, Terrain 1 et Lieu principal - T01 comme terrain 1", () => {
+  const variants = ["T01", "T1", "Terrain 1", "Lieu principal - T01"];
+  for (const label of variants) {
+    const [match] = parseMatchesHtml(`
+      <h5 class="match-group__header">15:00</h5>
+      <div class="match match--list">
+        <div class="match__header"><span class="nav-link__value">SM 1</span><span class="nav-link__value">Ronde 1</span><span class="nav-link__value">${label}</span><span class="nav-link__value">Nu bezig</span></div>
+        <div class="match__body">
+          <div class="match__row"><a data-player-id="1"><span class="nav-link__value">Alice Exemple</span></a></div>
+          <div class="match__row"><a data-player-id="2"><span class="nav-link__value">Bob Exemple</span></a></div>
+        </div>
+      </div>`);
+    assert.equal(match.status, "active");
+    assert.equal(match.court, 1, label);
+  }
+});
+
+test("diagnostique les matchs actifs avec joueurs, lieu brut, terrain et statut", () => {
+  const diagnostic = diagnoseTsResultsHtml(`
+    <h5 class="match-group__header">15:00</h5>
+    <div class="match match--list">
+      <div class="match__header"><span class="nav-link__value">SM 1</span><span class="nav-link__value">Ronde 1</span><span class="nav-link__value">Lieu principal - T01</span><span class="nav-link__value">Nu bezig</span></div>
+      <div class="match__body">
+        <div class="match__row"><a data-player-id="1"><span class="nav-link__value">Alice Exemple</span></a></div>
+        <div class="match__row"><a data-player-id="2"><span class="nav-link__value">Bob Exemple</span></a></div>
+      </div>
+    </div>`);
+
+  assert.deepEqual(diagnostic.activeMatches, [{
+    players: ["Alice Exemple", "Bob Exemple"],
+    playersText: "Alice Exemple vs Bob Exemple",
+    rawLocation: "Lieu principal - T01",
+    extractedCourt: 1,
+    detectedStatus: "active"
+  }]);
+});

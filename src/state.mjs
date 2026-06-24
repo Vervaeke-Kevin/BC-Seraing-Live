@@ -78,8 +78,27 @@ function matchType(match) {
   return match.players.length > 2 ? "double" : "simple";
 }
 
-function matchKey(match) {
-  return [match.draw, match.round, match.playersText, match.time || ""].join("|");
+function normalizeTsIdentityPart(value = "") {
+  return String(value)
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+export function matchKey(match) {
+  const players = (match.players?.length ? match.players : [match.playersText || ""])
+    .map(normalizeTsIdentityPart)
+    .sort()
+    .join("/");
+  return [
+    normalizeTsIdentityPart(match.dateKey || ""),
+    normalizeTsIdentityPart(match.time || ""),
+    normalizeTsIdentityPart(match.draw || ""),
+    normalizeTsIdentityPart(match.round || ""),
+    players
+  ].join("|");
 }
 
 function inferGenderFromDraw(draw = "") {
@@ -245,10 +264,7 @@ export function createTournamentState(config) {
 
   function addCompletedMatch(match) {
     const key = matchKey(match);
-    const exists = state.completedMatches.some(item =>
-      item.tsKey === key ||
-      (item.draw === match.draw && item.round === match.round && item.playersText === match.playersText)
-    );
+    const exists = state.completedMatches.some(item => item.tsKey === key);
     if (exists) return;
 
     state.completedMatches.unshift({
@@ -274,6 +290,9 @@ export function createTournamentState(config) {
     activateTournamentData();
 
     mergeUpcomingMatches(parsedMatches);
+
+    finished.forEach(match => addCompletedMatch(match));
+
     const activeCourtNumbers = new Set(active.map(match => match.court));
 
     active.forEach(match => {
@@ -288,7 +307,10 @@ export function createTournamentState(config) {
         players: match.players,
         warmupStartedAt: now,
         matchStartedAt: null,
-        source: "tournamentsoftware"
+        source: "tournamentsoftware",
+        dateKey: match.dateKey || "",
+        time: match.time || "",
+        tsKey: matchKey(match)
       };
 
       const index = state.courts.findIndex(court => court.court === match.court);
@@ -309,14 +331,7 @@ export function createTournamentState(config) {
       }
     });
 
-    finished.forEach(match => {
-      const court = state.courts.find(item => item.playersText === match.playersText || (match.court && item.court === match.court));
-      if (court && !court.free) {
-        finishCourt(court.court, "tournamentsoftware", match.score);
-      } else {
-        addCompletedMatch(match);
-      }
-    });
+
   }
 
   function disableSimulationAfterLiveFailure() {
@@ -427,18 +442,22 @@ export function createTournamentState(config) {
     const duration = court.matchStartedAt ? Math.max(1, Math.round((secondsNow() - court.matchStartedAt) / 60)) : null;
 
     if (score) {
-      state.completedMatches.unshift({
-        id: `live-${Date.now()}`,
-        endedAt: toClock(),
-        draw: court.draw,
-        round: court.round,
-        type: court.players.length > 2 ? "double" : "simple",
-        playersText: court.playersText,
-        players: court.players,
-        winners: [],
-        score,
-        duration: duration || 0
-      });
+      const tsKey = court.tsKey || matchKey(court);
+      if (!state.completedMatches.some(item => item.tsKey === tsKey)) {
+        state.completedMatches.unshift({
+          id: `live-${tsKey}`.slice(0, 140),
+          tsKey,
+          endedAt: toClock(),
+          draw: court.draw,
+          round: court.round,
+          type: court.players.length > 2 ? "double" : "simple",
+          playersText: court.playersText,
+          players: court.players,
+          winners: [],
+          score,
+          duration: duration || 0
+        });
+      }
     }
 
     court.free = true;
@@ -531,7 +550,8 @@ export function createTournamentState(config) {
     markMatchStarted,
     restartWarmup,
     finishCourt,
-    simulateScore
+    simulateScore,
+    _mergeLiveMatchesForTest: mergeLiveMatches
   };
 }
 
