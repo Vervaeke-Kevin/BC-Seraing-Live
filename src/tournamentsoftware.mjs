@@ -40,9 +40,9 @@ function extractCourt(rowText) {
 }
 
 function extractScore(text, block = "") {
-  const score = text.match(/\b\d{1,2}-\d{1,2}(?:\s+\d{1,2}-\d{1,2}){0,2}\b/);
-  if (score) return score[0];
-  if (/\b(w-?o|walkover|forfait)\b/i.test(text) || /match__message">\s*Walkover/i.test(block)) return "WO";
+  const scores = [...text.matchAll(/\b\d{1,2}\s*[-–]\s*\d{1,2}\b/g)].map(match => match[0].replace(/\s*[–-]\s*/g, "-"));
+  if (scores.length) return scores.slice(0, 3).join(" ");
+  if (/\b(w\s*[-/]?\s*o|walk\s*over|forfait)\b/i.test(text) || /match__message[^"]*">\s*(?:Walkover|Forfait|WO)/i.test(block)) return "WO";
   return "";
 }
 
@@ -54,7 +54,7 @@ function normalizeMatchPlayerName(name) {
 }
 
 function extractPlayersFromMatch(block) {
-  const rowStarts = [...block.matchAll(/<div class="match__row(?:\s| has-won)[^"]*">/gi)].map(match => match.index);
+  const rowStarts = [...block.matchAll(/<div\b[^>]*class=["'][^"']*\bmatch__row\b[^"']*["'][^>]*>/gi)].map(match => match.index);
   const rows = rowStarts.map((start, index) => block.slice(start, rowStarts[index + 1] ?? block.length));
   const rowItems = rows.map(row => {
     const players = [...row.matchAll(/data-player-id="[^"]+"[\s\S]*?<span class="nav-link__value">([\s\S]*?)<\/span>/gi)]

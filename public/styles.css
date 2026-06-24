@@ -99,3 +99,6 @@ th { color: var(--muted); font-size: 11px; text-transform: uppercase; }
 footer { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; color: var(--muted); font-size: 12px; padding-top: 18px; }
 @media (max-width: 1180px) { .courts { grid-template-columns: repeat(2, minmax(250px, 1fr)); } .summary, .grid2, .playerGrid { grid-template-columns: 1fr; } }
 @media (max-width: 680px) { .app { padding: 14px; } header, .toolbar { flex-direction: column; align-items: flex-start; } .courts { grid-template-columns: 1fr; } .nextMatch, .resultItem { grid-template-columns: 1fr; } }
+
+.dayTabs { display: flex; gap: 8px; margin-bottom: 12px; }
+.dayTabs button.active { background: var(--ink); color: white; border-color: var(--ink); }
