@@ -20,6 +20,7 @@ let mode = location.pathname.toLowerCase().includes("organisateur") || new URLSe
 let clubFilter = false;
 let selectedClub = "BC Seraing";
 let selectedPlayer = "Manon Orban";
+let selectedPlayerDay = "samedi";
 
 const $ = (id) => document.getElementById(id);
 const fmt = (seconds) => {
@@ -55,7 +56,7 @@ function renderShell() {
   $("pageTitle").textContent = titles[page];
   const occupied = appState.courts.filter(court => court.status !== "free").length;
   const updatedAt = appState.sync.lastSyncAt ? new Date(appState.sync.lastSyncAt).toLocaleTimeString("fr-BE", { hour: "2-digit", minute: "2-digit" }) : "--:--";
-  $("syncStatus").textContent = `Terrains occupés ${occupied}/12 · mise à jour ${updatedAt}${appState.sync.lastError ? ` · ${appState.sync.lastError}` : ""}`;
+  $("syncStatus").textContent = `Terrains occupés ${occupied}/12 · mise à jour ${updatedAt} · version ${appState.config.version}${appState.sync.lastError ? ` · ${appState.sync.lastError}` : ""}`;
 
   Object.entries(pages).forEach(([key, el]) => el.classList.toggle("hidden", key !== page));
   document.querySelectorAll("[data-page]").forEach(button => button.classList.toggle("active", button.dataset.page === page));
@@ -162,6 +163,19 @@ function table(matches, winnerMode = false) {
   `).join("")}</tbody></table>`;
 }
 
+function dayKey(match) {
+  const label = `${match.dateLabel || ""} ${match.dateKey || ""}`.toLowerCase();
+  if (label.includes("dim") || label.includes("sun") || label.includes("zondag")) return "dimanche";
+  if (label.includes("sam") || label.includes("sat") || label.includes("zaterdag")) return "samedi";
+  return "samedi";
+}
+
+function playerMatchCard(match, kind) {
+  const time = match.endedAt || match.time || "--:--";
+  const result = kind === "played" ? `<div class="score">${escapeHtml(match.score || "Résultat")}</div>` : `<div class="chips">${match.rest?.some(item => item.blocked) ? `<span class="badge rest">Pas avant ${match.rest.find(item => item.blocked).restUntilText}</span>` : `<span class="badge playing">à venir</span>`}</div>`;
+  return `<article class="nextMatch"><div class="matchTime"><span>${escapeHtml(match.dateLabel || kind)}</span>${escapeHtml(time)}</div><div><div class="draw">${escapeHtml(match.draw)} · ${escapeHtml(match.round)}</div><div class="nextPlayers">${escapeHtml(match.playersText)}</div>${result}</div></article>`;
+}
+
 function renderTournament() {
   clubsForControls();
   const visible = appState.completedMatches.filter(matchForClub);
@@ -202,6 +216,11 @@ function renderPlayer() {
   if (!player) return;
   const completed = appState.completedMatches.filter(match => match.players.includes(player.name));
   const upcoming = appState.upcomingMatches.filter(match => match.players.includes(player.name));
+  const allMatches = [
+    ...upcoming.map(match => ({ ...match, kind: "upcoming" })),
+    ...completed.map(match => ({ ...match, kind: "played" }))
+  ].sort((a, b) => (a.dateKey || "").localeCompare(b.dateKey || "") || (a.time || a.endedAt || "").localeCompare(b.time || b.endedAt || ""));
+  const dayMatches = allMatches.filter(match => dayKey(match) === selectedPlayerDay);
   const wins = completed.filter(match => match.winners.includes(player.name)).length;
   const total = completed.reduce((sum, match) => sum + match.duration, 0);
   const [nutTitle, nutText] = nutritionAdvice(player.name);
@@ -222,7 +241,7 @@ function renderPlayer() {
       <div>
         <div class="nutrition"><strong>Coin ravito · ${nutTitle}</strong><p>${nutText}</p></div>
         <div class="panel"><h2>Prochain match</h2>${next ? `<article class="nextMatch"><div class="matchTime">${next.time}</div><div><div class="draw">${escapeHtml(next.draw)} · ${escapeHtml(next.round)}</div><div class="nextPlayers">${escapeHtml(next.playersText)}</div></div></article>` : `<div class="empty">Aucun prochain match.</div>`}</div>
-        <div class="panel" style="margin-top:14px"><h2>Résultats</h2>${table(completed)}</div>
+        <div class="panel" style="margin-top:14px"><h2>Tous les matchs</h2><div class="dayTabs"><button data-player-day="samedi" class="${selectedPlayerDay === "samedi" ? "active" : ""}">Samedi</button><button data-player-day="dimanche" class="${selectedPlayerDay === "dimanche" ? "active" : ""}">Dimanche</button></div><div class="list">${dayMatches.length ? dayMatches.map(match => playerMatchCard(match, match.kind)).join("") : `<div class="empty">Aucun match ${selectedPlayerDay}.</div>`}</div></div>
       </div>
     </section>
   `;
@@ -256,8 +275,11 @@ document.addEventListener("click", async (event) => {
   if (target.dataset.warmup) appState = await post("/api/admin/restart-warmup", { court: target.dataset.warmup });
   if (target.dataset.finish) appState = await post("/api/admin/finish-court", { court: target.dataset.finish });
   if (target.dataset.score) appState = await post("/api/admin/simulate-score", { court: target.dataset.score });
+  if (target.dataset.playerDay) selectedPlayerDay = target.dataset.playerDay;
   render();
 });
 
+$("appVersion").textContent = "version --";
 await loadState();
+$("appVersion").textContent = `version ${appState.config.version}`;
 setInterval(loadState, 5000);

@@ -2,7 +2,9 @@ import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { completedMatches, liveCourts, players, upcomingMatches, WARMUP_SECONDS } from "./simulation.mjs";
-import { parseMatchDates, parseMatchesHtml, parsePlayersHtml } from "./tournamentsoftware.mjs";
+import { debugTournamentResults, parseMatchDates, parseMatchesHtml, parsePlayersHtml } from "./tournamentsoftware.mjs";
+
+export const APP_VERSION = "0.2.1";
 
 function nowIso() {
   return new Date().toISOString();
@@ -383,6 +385,24 @@ export function createTournamentState(config) {
     }
   }
 
+  async function debugTsResults() {
+    const matchesUrl = `${config.tournamentUrl}/matches`;
+    const matchSources = await readMatchSources(matchesUrl);
+    return {
+      generatedAt: nowIso(),
+      sourceCount: matchSources.length,
+      sources: matchSources.map(source => ({
+        source: source.source,
+        dateKey: source.dateKey || "",
+        dateLabel: source.dateLabel || "",
+        matches: debugTournamentResults(source.html, {
+          dateKey: source.dateKey || "",
+          dateLabel: source.dateLabel || ""
+        })
+      }))
+    };
+  }
+
   function startAutoSync() {
     if (state.timer) clearInterval(state.timer);
     state.timer = setInterval(() => syncNow("auto"), config.syncIntervalMs);
@@ -470,7 +490,8 @@ export function createTournamentState(config) {
       },
       config: {
         warmupSeconds: WARMUP_SECONDS,
-        tournamentUrl: config.tournamentUrl
+        tournamentUrl: config.tournamentUrl,
+        version: APP_VERSION
       },
       players: state.players,
       clubs,
@@ -511,7 +532,8 @@ export function createTournamentState(config) {
     markMatchStarted,
     restartWarmup,
     finishCourt,
-    simulateScore
+    simulateScore,
+    debugTsResults
   };
 }
 
