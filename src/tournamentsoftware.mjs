@@ -39,15 +39,18 @@ function extractCourt(rowText) {
   return court ? Number(court[1]) : null;
 }
 
+function extractPointSetScores(block = "") {
+  return [...block.matchAll(/<ul\b[^>]*class=["'][^"']*\bpoints\b[^"']*["'][^>]*>([\s\S]*?)<\/ul>/gi)]
+    .map(match => [...match[1].matchAll(/<li\b[^>]*class=["'][^"']*\bpoints__cell\b[^"']*["'][^>]*>([\s\S]*?)<\/li>/gi)]
+      .map(cell => stripTags(cell[1]))
+      .filter(Boolean))
+    .filter(cells => cells.length >= 2 && /^\d+$/.test(cells[0]) && /^\d+$/.test(cells[1]))
+    .map(cells => `${Number(cells[0])}-${Number(cells[1])}`);
+}
+
 function extractScore(text, block = "") {
-  const scoreText = [
-    ...[...block.matchAll(/<div\b[^>]*class=["'][^"']*\bmatch__(?:score|result)\b[^"']*["'][^>]*>([\s\S]*?)<\/div>/gi)].map(match => stripTags(match[1])),
-    text
-  ].join(" ");
-  const scores = [...scoreText.matchAll(/\b(?:[0-3]?\d)\s*([-–—−:])\s*(?:[0-3]?\d)\b/g)]
-    .filter(match => match[1] !== ":" || Number(match[0].split(":")[0].trim()) > 20)
-    .map(match => match[0].replace(/\s*[-–—−:]\s*/g, "-"));
-  if (scores.length) return [...new Set(scores)].slice(0, 3).join(" ");
+  const pointSetScores = extractPointSetScores(block);
+  if (pointSetScores.length) return pointSetScores.slice(0, 3).join(" ");
   if (/\b(w\s*[-/]?\s*o|walk\s*over|forfait)\b/i.test(text) || /match__message[^"]*">\s*(?:Walkover|Forfait|WO)/i.test(block)) return "WO";
   return "";
 }
@@ -152,9 +155,7 @@ function classNamesFor(fragment, classPrefix) {
 export function diagnoseTsResultsHtml(html, options = {}) {
   const matches = parseMatchesHtml(html, options);
   const blocks = splitBlocks(html, '<div class="match match--list">');
-  const scoreContainers = [...html.matchAll(/<[^>]+class=["'][^"']*\bmatch__(?:score|result)\b[^"']*["'][^>]*>([\s\S]*?)<\/[^>]+>/gi)]
-    .map(match => stripTags(match[1]))
-    .filter(Boolean);
+  const scoreContainers = extractPointSetScores(html);
   const messageContainers = [...html.matchAll(/<[^>]+class=["'][^"']*\bmatch__message\b[^"']*["'][^>]*>([\s\S]*?)<\/[^>]+>/gi)]
     .map(match => stripTags(match[1]))
     .filter(Boolean);

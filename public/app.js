@@ -164,6 +164,8 @@ function table(matches, winnerMode = false) {
 }
 
 function dayKey(match) {
+  if (match.dateKey === "20260628") return "dimanche";
+  if (match.dateKey === "20260627") return "samedi";
   const label = `${match.dateLabel || ""} ${match.dateKey || ""}`.toLowerCase();
   if (label.includes("dim") || label.includes("sun")) return "dimanche";
   return "samedi";

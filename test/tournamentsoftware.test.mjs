@@ -2,6 +2,17 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { diagnoseTsResultsHtml, parseMatchDates, parseMatchesHtml } from "../src/tournamentsoftware.mjs";
 
+function pointsHtml(score) {
+  return score
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(setScore => {
+      const [first, second] = setScore.split("-");
+      return `<ul class="points"><li class="points__cell">${first}</li><li class="points__cell">${second}</li></ul>`;
+    })
+    .join("");
+}
+
 function matchHtml({ score = "21-18 18-21 21-19", message = "", won = true } = {}) {
   return `
     <h5 class="match-group__header">14:30</h5>
@@ -10,7 +21,7 @@ function matchHtml({ score = "21-18 18-21 21-19", message = "", won = true } = {
       <div class="match__body">
         <div class="match__row${won ? " has-won" : ""}"><a data-player-id="1"><span class="nav-link__value">Alice Exemple</span></a></div>
         <div class="match__row"><a data-player-id="2"><span class="nav-link__value">Bob Exemple</span></a></div>
-        <div class="match__score">${score}</div>
+        <div class="match__score">${score ? pointsHtml(score) : ""}</div>
         <div class="match__message">${message}</div>
       </div>
     </div>`;
@@ -23,19 +34,14 @@ test("parse les scores TournamentSoftware normaux", () => {
   assert.deepEqual(match.winners, ["Alice Exemple"]);
 });
 
-test("parse les scores avec espaces autour des tirets", () => {
-  const [match] = parseMatchesHtml(matchHtml({ score: "21 - 19 22 – 20" }));
-  assert.equal(match.score, "21-19 22-20");
+test("parse le format réel ul.points par set", () => {
+  const [match] = parseMatchesHtml(matchHtml({ score: "13-21 21-12 21-19" }));
+  assert.equal(match.score, "13-21 21-12 21-19");
 });
 
-test("parse les scores avec tirets longs, signe moins et séparateur deux-points", () => {
-  const [match] = parseMatchesHtml(matchHtml({ score: "21—19 18−21 23:21" }));
-  assert.equal(match.score, "21-19 18-21 23-21");
-});
-
-test("ignore les heures lors de l'extraction des scores", () => {
-  const [match] = parseMatchesHtml(matchHtml({ score: "14:30 21-19 21-18" }));
-  assert.equal(match.score, "21-19 21-18");
+test("parse un score de double au format réel TournamentSoftware", () => {
+  const [match] = parseMatchesHtml(matchHtml({ score: "14-21 15-21" }));
+  assert.equal(match.score, "14-21 15-21");
 });
 
 test("parse les résultats WO", () => {
@@ -61,6 +67,6 @@ test("diagnostique la structure réelle des résultats TS", () => {
   assert.equal(diagnostic.counts.matchBlocks, 1);
   assert.equal(diagnostic.counts.parsedMatches, 1);
   assert.equal(diagnostic.counts.finishedMatches, 1);
-  assert.deepEqual(diagnostic.scoreSamples, ["21-16 21-17"]);
+  assert.deepEqual(diagnostic.scoreSamples, ["21-16", "21-17"]);
   assert.equal(diagnostic.parsedScoreSamples[0].score, "21-16 21-17");
 });
