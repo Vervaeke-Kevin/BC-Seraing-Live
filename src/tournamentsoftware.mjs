@@ -78,7 +78,7 @@ function normalizePlayerName(name) {
   return clean;
 }
 
-function parseMatchBlock(block, time = "") {
+function parseMatchBlock(block, time = "", options = {}) {
     const matchBlock = block.split(/<\/div>\s*<\/li>\s*<li class="match-group__item">/i)[0];
     const text = stripTags(matchBlock);
     const active = /\b(Nu bezig|En cours|Now playing)\b/i.test(text);
@@ -93,6 +93,8 @@ function parseMatchBlock(block, time = "") {
     return {
       id: `${draw}-${round}-${playersText}`.slice(0, 120),
       time,
+      dateKey: options.dateKey || "",
+      dateLabel: options.dateLabel || "",
       court,
       status: active ? "active" : score ? "finished" : "scheduled",
       score,
@@ -105,14 +107,31 @@ function parseMatchBlock(block, time = "") {
     };
 }
 
-export function parseMatchesHtml(html) {
+export function parseMatchDates(html) {
+  const dates = [];
+  const seen = new Set();
+
+  for (const match of html.matchAll(/<a\b[^>]*href=["'][^"']*\/matches\/(\d{8})[^"']*["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+    const dateKey = match[1];
+    if (seen.has(dateKey)) continue;
+    seen.add(dateKey);
+    dates.push({
+      dateKey,
+      dateLabel: stripTags(match[2])
+    });
+  }
+
+  return dates;
+}
+
+export function parseMatchesHtml(html, options = {}) {
   const matches = [];
   const sectionRegex = /<h5 class="[^"]*match-group__header[^"]*"[^>]*>\s*([0-9]{1,2}:[0-9]{2})\s*<\/h5>/gi;
   const sections = [...html.matchAll(sectionRegex)];
 
   if (!sections.length) {
     for (const block of splitBlocks(html, '<div class="match match--list">')) {
-      const match = parseMatchBlock(block);
+      const match = parseMatchBlock(block, "", options);
       if (match) matches.push(match);
     }
     return matches;
@@ -124,7 +143,7 @@ export function parseMatchesHtml(html) {
     const end = sections[index + 1]?.index ?? html.length;
     const sectionHtml = html.slice(start, end);
     for (const block of splitBlocks(sectionHtml, '<div class="match match--list">')) {
-      const match = parseMatchBlock(block, time);
+      const match = parseMatchBlock(block, time, options);
       if (match) matches.push(match);
     }
   });

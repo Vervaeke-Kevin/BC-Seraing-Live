@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { completedMatches, liveCourts, players, upcomingMatches, WARMUP_SECONDS } from "./simulation.mjs";
-import { parseMatchesHtml, parsePlayersHtml } from "./tournamentsoftware.mjs";
+import { parseMatchDates, parseMatchesHtml, parsePlayersHtml } from "./tournamentsoftware.mjs";
 
 function nowIso() {
   return new Date().toISOString();
@@ -19,6 +19,10 @@ function toClock(date = new Date()) {
 function timeToMinutes(time) {
   const [hours, minutes] = time.split(":").map(Number);
   return hours * 60 + minutes;
+}
+
+function dateToOrder(dateKey = "") {
+  return Number(dateKey) || 0;
 }
 
 function minutesToTime(total) {
@@ -182,6 +186,29 @@ export function createTournamentState(config) {
     return { html: await fetchText(url), source: url };
   }
 
+  async function readMatchSources(matchesUrl) {
+    const firstSource = await readHtmlSource("matches", matchesUrl);
+    if (config.useLocalHtml) return [firstSource];
+
+    const dates = parseMatchDates(firstSource.html);
+    if (!dates.length) return [firstSource];
+
+    const sources = [];
+    for (const date of dates) {
+      try {
+        sources.push({
+          html: await fetchText(`${matchesUrl}/${date.dateKey}`),
+          source: `${matchesUrl}/${date.dateKey}`,
+          dateKey: date.dateKey,
+          dateLabel: date.dateLabel
+        });
+      } catch {
+        if (!sources.length) sources.push({ ...firstSource, dateKey: date.dateKey, dateLabel: date.dateLabel });
+      }
+    }
+    return sources.length ? sources : [firstSource];
+  }
+
   function mergePlayers(parsedPlayers) {
     if (!parsedPlayers.length) return;
     const byName = new Map(state.players.map(player => [player.name, player]));
@@ -197,13 +224,19 @@ export function createTournamentState(config) {
       .map(match => ({
         id: match.id,
         time: match.time,
+        dateKey: match.dateKey || "",
+        dateLabel: match.dateLabel || "",
         draw: match.draw || "Tableau à confirmer",
         round: match.round || "Tour à confirmer",
         type: matchType(match),
         playersText: match.playersText,
         players: match.players
       }))
-      .sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time) || a.draw.localeCompare(b.draw, "fr"));
+      .sort((a, b) =>
+        dateToOrder(a.dateKey) - dateToOrder(b.dateKey) ||
+        timeToMinutes(a.time) - timeToMinutes(b.time) ||
+        a.draw.localeCompare(b.draw, "fr")
+      );
 
     if (scheduled.length) state.upcomingMatches = scheduled;
   }
@@ -299,7 +332,7 @@ export function createTournamentState(config) {
     const matchesUrl = `${config.tournamentUrl}/matches`;
     const playersUrl = `${config.tournamentUrl}/players`;
     try {
-      const matchesSource = await readHtmlSource("matches", matchesUrl);
+      const matchSources = await readMatchSources(matchesUrl);
       let playersSource = { html: "", source: "" };
       let playersWarning = null;
 
@@ -311,7 +344,10 @@ export function createTournamentState(config) {
         if (localPlayers) playersSource = localPlayers;
       }
 
-      const parsedMatches = parseMatchesHtml(matchesSource.html);
+      const parsedMatches = matchSources.flatMap(source => parseMatchesHtml(source.html, {
+        dateKey: source.dateKey || "",
+        dateLabel: source.dateLabel || ""
+      }));
       let parsedPlayers = parsePlayersHtml(playersSource.html);
 
       if (!parsedPlayers.length && !config.useLocalHtml) {

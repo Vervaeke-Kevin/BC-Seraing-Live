@@ -66,7 +66,8 @@ button.active, .seg button.active { background: var(--ink); color: white; border
 .list { display: grid; gap: 10px; }
 .nextMatch { display: grid; grid-template-columns: 92px 1fr; gap: 14px; padding: 14px; }
 .nextMatch.blocked { border-color: rgba(245,158,11,.55); background: linear-gradient(90deg, var(--amber-soft), white 42%); }
-.matchTime { display: grid; place-items: center; min-height: 86px; border: 1px solid var(--line); background: #f8fafc; border-radius: 8px; font-size: 26px; font-weight: 950; }
+.matchTime { display: grid; place-items: center; align-content: center; min-height: 86px; border: 1px solid var(--line); background: #f8fafc; border-radius: 8px; font-size: 26px; font-weight: 950; }
+.matchTime span { color: var(--muted); font-size: 11px; line-height: 1.1; font-weight: 900; text-transform: uppercase; letter-spacing: .04em; text-align: center; }
 .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
 .playerRest { color: var(--red); background: var(--red-soft); border-radius: 6px; padding: 1px 4px; }
 .panel { padding: 14px; }

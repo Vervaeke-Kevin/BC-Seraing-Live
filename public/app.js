@@ -144,7 +144,7 @@ function renderNext() {
     const notBefore = blockedRest.length ? blockedRest.reduce((max, item) => item.restUntil > max.restUntil ? item : max).restUntilText : "";
     return `
       <article class="nextMatch ${blocked ? "blocked" : ""}">
-        <div class="matchTime">${match.time}</div>
+        <div class="matchTime"><span>${escapeHtml(match.dateLabel || "")}</span>${match.time}</div>
         <div>
           <div class="draw">${escapeHtml(match.draw)} · ${escapeHtml(match.round)}</div>
           <div class="nextPlayers">${highlightRest(match)}</div>
