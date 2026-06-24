@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { parseMatchesHtml } from "../src/tournamentsoftware.mjs";
+import { debugTournamentResults, parseMatchesHtml } from "../src/tournamentsoftware.mjs";
 
 function matchHtml({ score = "21-18 18-21 21-19", message = "", won = true } = {}) {
   return `
@@ -53,4 +53,21 @@ test("reconstruit les scores depuis les nombres des lignes joueurs", () => {
   const [match] = parseMatchesHtml(html);
   assert.equal(match.status, "finished");
   assert.equal(match.score, "21-19 18-21 21-11");
+});
+
+
+test("diagnostique les zones score/résultat sans renvoyer le HTML complet", () => {
+  const [diagnostic] = debugTournamentResults(matchHtml({ score: "<span>21</span><span>18</span>" }), { dateKey: "20260627", dateLabel: "zaterdag 27 juni 2026" });
+
+  assert.equal(diagnostic.dateKey, "20260627");
+  assert.equal(diagnostic.dateLabel, "zaterdag 27 juni 2026");
+  assert.equal(diagnostic.time, "14:30");
+  assert.equal(diagnostic.draw, "SM 12");
+  assert.equal(diagnostic.round, "Finale");
+  assert.deepEqual(diagnostic.players, ["Alice Exemple", "Bob Exemple"]);
+  assert.deepEqual(diagnostic.scoreOrResultClasses, ["match__score"]);
+  assert.deepEqual(diagnostic.playerRows.map(row => row.text), ["Alice Exemple", "Bob Exemple"]);
+  assert.deepEqual(diagnostic.playerRows.map(row => row.numbers), [[], []]);
+  assert.equal(diagnostic.parserScore, "21-18");
+  assert.equal(Object.hasOwn(diagnostic, "html"), false);
 });

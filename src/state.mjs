@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { completedMatches, liveCourts, players, upcomingMatches, WARMUP_SECONDS } from "./simulation.mjs";
 import { debugTournamentResults, parseMatchDates, parseMatchesHtml, parsePlayersHtml } from "./tournamentsoftware.mjs";
 
-export const APP_VERSION = "0.2.1";
+export const APP_VERSION = "0.2.0";
 
 function nowIso() {
   return new Date().toISOString();

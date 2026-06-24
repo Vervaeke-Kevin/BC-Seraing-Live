@@ -79,7 +79,7 @@ function playerRows(block) {
     .filter(match => match[1].split(/\s+/).includes("match__row"))
     .map(match => match.index);
   return rowStarts.map((start, index) => {
-    const nextSection = block.slice(start + 1).search(/<div\b[^>]*class=["'][^"']*match__(?:result|btn|footer)[^"']*["']/i);
+    const nextSection = block.slice(start + 1).search(/<div\b[^>]*class=["'][^"']*match__(?:score|result|btn|footer)[^"']*["']/i);
     const sectionEnd = nextSection >= 0 ? start + 1 + nextSection : block.length;
     return block.slice(start, Math.min(rowStarts[index + 1] ?? block.length, sectionEnd));
   });
