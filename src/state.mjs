@@ -4,6 +4,8 @@ import { join } from "node:path";
 import { completedMatches, liveCourts, players, upcomingMatches, WARMUP_SECONDS } from "./simulation.mjs";
 import { parseMatchDates, parseMatchesHtml, parsePlayersHtml } from "./tournamentsoftware.mjs";
 
+export const APP_VERSION = "0.2.0";
+
 function nowIso() {
   return new Date().toISOString();
 }
@@ -470,7 +472,8 @@ export function createTournamentState(config) {
       },
       config: {
         warmupSeconds: WARMUP_SECONDS,
-        tournamentUrl: config.tournamentUrl
+        tournamentUrl: config.tournamentUrl,
+        version: APP_VERSION
       },
       players: state.players,
       clubs,
