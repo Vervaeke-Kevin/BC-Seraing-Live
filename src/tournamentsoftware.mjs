@@ -34,8 +34,8 @@ function valuesIn(html) {
     .filter(Boolean);
 }
 
-function extractCourt(rowText) {
-  const court = rowText.match(/\bT(?:errain)?\s*0?(\d{1,2})\b/i) || rowText.match(/\bT0?(\d{1,2})\b/i);
+export function extractCourt(rowText) {
+  const court = String(rowText || "").match(/(?:\b(?:terrain|t)\s*0?(\d{1,2})\b)/i);
   return court ? Number(court[1]) : null;
 }
 
@@ -92,7 +92,8 @@ function parseMatchBlock(block, time = "", options = {}) {
     const text = stripTags(matchBlock);
     const active = /\b(Nu bezig|En cours|Now playing)\b/i.test(text);
     const score = extractScore(text, matchBlock);
-    const court = extractCourt(text);
+    const rawLocation = valuesIn(matchBlock).find(value => extractCourt(value)) || text.match(/(?:Lieu principal|Locatie|Location)[^-–—]*[-–—]?\s*T(?:errain)?\s*0?\d{1,2}/i)?.[0] || "";
+    const court = extractCourt(rawLocation || text);
 
     const header = matchBlock.match(/<div class="match__header">([\s\S]*?)<div class="match__body">/i)?.[1] || "";
     const [draw = "", round = ""] = valuesIn(header).filter(value => value !== "Nu bezig");
@@ -112,6 +113,7 @@ function parseMatchBlock(block, time = "", options = {}) {
       winners,
       draw,
       round,
+      rawLocation,
       raw: text
     };
 }
@@ -175,6 +177,13 @@ export function diagnoseTsResultsHtml(html, options = {}) {
     scoreClasses: [...new Set(classNamesFor(html, "match__").filter(className => /score|result|message|status/.test(className)))].sort(),
     scoreSamples: scoreContainers.slice(0, 10),
     messageSamples: messageContainers.slice(0, 10),
+    activeMatches: matches.filter(match => match.status === "active").map(match => ({
+      players: match.players,
+      playersText: match.playersText,
+      rawLocation: match.rawLocation,
+      extractedCourt: match.court,
+      detectedStatus: match.status
+    })),
     parsedScoreSamples: matches.filter(match => match.score).slice(0, 10).map(match => ({
       time: match.time,
       draw: match.draw,
