@@ -26,7 +26,10 @@ export function classifyEventDiscipline(result = {}) {
   if (/^(S|SINGLE|SINGLES|SIMPLE|ENKEL|ENKELSPEL)$/.test(declared)) fromDeclared = "singles";
   if (/^(D|DOUBLE|DOUBLES|DUBBEL|DUBBELSPEL|MIXED_DOUBLES|MIXED-DOUBLES|MIXTE_DOUBLES|MIXTE-DOUBLES)$/.test(declared)) fromDeclared = "doubles";
 
-  // Une contradiction explicite entre les métadonnées et le libellé bloque le calcul.
+  // Un tableau clairement nommé « doubles » ne peut jamais compter pour le simple,
+  // même si l’ancien importateur l’a incorrectement étiqueté « simple ».
+  if (fromName === "doubles") return "doubles";
+  // Toute autre contradiction doit être vérifiée avant attribution de points.
   if (fromDeclared !== "unknown" && fromName !== "unknown" && fromDeclared !== fromName) return "unknown";
   if (fromDeclared !== "unknown") return fromDeclared;
   if (fromName !== "unknown") return fromName;
