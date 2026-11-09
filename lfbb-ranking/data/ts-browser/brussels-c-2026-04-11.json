@@ -1,0 +1,2303 @@
+{
+  "source": "TournamentSoftware – visible browser Matches page",
+  "extractedAt": "2026-11-09",
+  "tournament": {
+    "id": "c526a121-b847-470f-97f0-589fe215e1d7",
+    "name": "Brussels C",
+    "date": "2026-04-11",
+    "level": "C"
+  },
+  "status": "raw_audit_not_official",
+  "summary": {
+    "matches": 79,
+    "valid": 79,
+    "scores": 73,
+    "walkovers": 6,
+    "withoutMemberIds": 0
+  },
+  "records": [
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/1",
+      "drawId": 6,
+      "draw": "SG U13 C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Damien Vryghem",
+            "playerTsId": "13",
+            "memberId": "30064004"
+          }
+        ],
+        [
+          {
+            "name": "Bastien Jaugey",
+            "playerTsId": "5",
+            "memberId": "30067395"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-11 21-11",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/2",
+      "drawId": 6,
+      "draw": "SG U13 C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Victor Jaugey",
+            "playerTsId": "6",
+            "memberId": "30007917"
+          }
+        ],
+        [
+          {
+            "name": "Zachary Gentile",
+            "playerTsId": "32",
+            "memberId": "30007027"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "10-21 15-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/3",
+      "drawId": 43,
+      "draw": "SG U17 C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Robin Deforche",
+            "playerTsId": "93",
+            "memberId": "50477072"
+          }
+        ],
+        [
+          {
+            "name": "Rui Hé",
+            "playerTsId": "36",
+            "memberId": "30000129"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-15 21-17",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/4",
+      "drawId": 43,
+      "draw": "SG U17 C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Sovanthy Lefebvre",
+            "playerTsId": "59",
+            "memberId": "30066970"
+          }
+        ],
+        [
+          {
+            "name": "Victor Kinard",
+            "playerTsId": "23",
+            "memberId": "30061535"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "8-21 11-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/5",
+      "drawId": 36,
+      "draw": "SG U15 C & SF U17 C - Groupe A",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "William Elias",
+            "playerTsId": "4",
+            "memberId": "30069820"
+          }
+        ],
+        [
+          {
+            "name": "Antoine Houtekiet",
+            "playerTsId": "66",
+            "memberId": "30095628"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-15 21-19",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/6",
+      "drawId": 37,
+      "draw": "SG U15 C & SF U17 C - Groupe B",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Lucien Lambert",
+            "playerTsId": "42",
+            "memberId": "30077266"
+          }
+        ],
+        [
+          {
+            "name": "Emma Bartoli",
+            "playerTsId": "79",
+            "memberId": "24150522"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "15-21 21-14 21-19",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/7",
+      "drawId": 37,
+      "draw": "SG U15 C & SF U17 C - Groupe B",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Alexandre Janssens",
+            "playerTsId": "58",
+            "memberId": "30077441"
+          }
+        ],
+        [
+          {
+            "name": "Liam Marcolungo",
+            "playerTsId": "61",
+            "memberId": "10527991"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-4 21-0",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/8",
+      "drawId": 38,
+      "draw": "SG U15 C & SF U17 C - Groupe C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Cleo Van Dyck",
+            "playerTsId": "12",
+            "memberId": "30070529"
+          }
+        ],
+        [
+          {
+            "name": "Sasha Alamat",
+            "playerTsId": "65",
+            "memberId": "30004212"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-7 21-19",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/9",
+      "drawId": 38,
+      "draw": "SG U15 C & SF U17 C - Groupe C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Kameron Duriau",
+            "playerTsId": "3",
+            "memberId": "30075782"
+          }
+        ],
+        [
+          {
+            "name": "Samuel Baquet",
+            "playerTsId": "19",
+            "memberId": "30070489"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "16-21 19-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/10",
+      "drawId": 56,
+      "draw": "SG U19 C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Abel Debusscher",
+            "playerTsId": "22",
+            "memberId": "51235552"
+          }
+        ],
+        [
+          {
+            "name": "Elie Rozenberg",
+            "playerTsId": "62",
+            "memberId": "30000448"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "16-21 21-18 21-11",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/11",
+      "drawId": 56,
+      "draw": "SG U19 C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Darren Zheng",
+            "playerTsId": "91",
+            "memberId": "30004590"
+          }
+        ],
+        [
+          {
+            "name": "Yihanwidy Ye",
+            "playerTsId": "14",
+            "memberId": "8528308"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-10 21-15",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/12",
+      "drawId": 23,
+      "draw": "SF U13-U15 C - Groupe A",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Jeanne Bia",
+            "playerTsId": "99",
+            "memberId": "30009886"
+          }
+        ],
+        [
+          {
+            "name": "Eleanore Reynaerts",
+            "playerTsId": "50",
+            "memberId": "30076526"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "18-21 15-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/13",
+      "drawId": 24,
+      "draw": "SF U13-U15 C - Groupe B",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Sharvari Soman",
+            "playerTsId": "10",
+            "memberId": "30008463"
+          }
+        ],
+        [
+          {
+            "name": "Jade Bartoli",
+            "playerTsId": "78",
+            "memberId": "24148535"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "1-21 2-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/14",
+      "drawId": 6,
+      "draw": "SG U13 C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Ruthvik Sai Kurra",
+            "playerTsId": "101",
+            "memberId": "30000735"
+          }
+        ],
+        [
+          {
+            "name": "Victor Jaugey",
+            "playerTsId": "6",
+            "memberId": "30007917"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-5 21-9",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/15",
+      "drawId": 6,
+      "draw": "SG U13 C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Damien Vryghem",
+            "playerTsId": "13",
+            "memberId": "30064004"
+          }
+        ],
+        [
+          {
+            "name": "Zachary Gentile",
+            "playerTsId": "32",
+            "memberId": "30007027"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "19-21 21-8 21-14",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/16",
+      "drawId": 43,
+      "draw": "SG U17 C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Léandro Castro Morais",
+            "playerTsId": "21",
+            "memberId": "30078037"
+          }
+        ],
+        [
+          {
+            "name": "Sovanthy Lefebvre",
+            "playerTsId": "59",
+            "memberId": "30066970"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-8 21-14",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/17",
+      "drawId": 43,
+      "draw": "SG U17 C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Robin Deforche",
+            "playerTsId": "93",
+            "memberId": "50477072"
+          }
+        ],
+        [
+          {
+            "name": "Victor Kinard",
+            "playerTsId": "23",
+            "memberId": "30061535"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "7-21 12-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/18",
+      "drawId": 36,
+      "draw": "SG U15 C & SF U17 C - Groupe A",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Tristan Reiss",
+            "playerTsId": "26",
+            "memberId": "30094483"
+          }
+        ],
+        [
+          {
+            "name": "William Elias",
+            "playerTsId": "4",
+            "memberId": "30069820"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-10 21-6",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/19",
+      "drawId": 37,
+      "draw": "SG U15 C & SF U17 C - Groupe B",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Alexandre Janssens",
+            "playerTsId": "58",
+            "memberId": "30077441"
+          }
+        ],
+        [
+          {
+            "name": "Lucien Lambert",
+            "playerTsId": "42",
+            "memberId": "30077266"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-10 21-10",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/20",
+      "drawId": 37,
+      "draw": "SG U15 C & SF U17 C - Groupe B",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Emma Bartoli",
+            "playerTsId": "79",
+            "memberId": "24150522"
+          }
+        ],
+        [
+          {
+            "name": "Liam Marcolungo",
+            "playerTsId": "61",
+            "memberId": "10527991"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-3 21-1",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/21",
+      "drawId": 38,
+      "draw": "SG U15 C & SF U17 C - Groupe C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Kameron Duriau",
+            "playerTsId": "3",
+            "memberId": "30075782"
+          }
+        ],
+        [
+          {
+            "name": "Cleo Van Dyck",
+            "playerTsId": "12",
+            "memberId": "30070529"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "17-21 21-9 21-18",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/22",
+      "drawId": 38,
+      "draw": "SG U15 C & SF U17 C - Groupe C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Sasha Alamat",
+            "playerTsId": "65",
+            "memberId": "30004212"
+          }
+        ],
+        [
+          {
+            "name": "Samuel Baquet",
+            "playerTsId": "19",
+            "memberId": "30070489"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "15-21 9-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/23",
+      "drawId": 56,
+      "draw": "SG U19 C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Lucas Petroons",
+            "playerTsId": "9",
+            "memberId": "51781050"
+          }
+        ],
+        [
+          {
+            "name": "Darren Zheng",
+            "playerTsId": "91",
+            "memberId": "30004590"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-12 21-14",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/24",
+      "drawId": 56,
+      "draw": "SG U19 C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Abel Debusscher",
+            "playerTsId": "22",
+            "memberId": "51235552"
+          }
+        ],
+        [
+          {
+            "name": "Yihanwidy Ye",
+            "playerTsId": "14",
+            "memberId": "8528308"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-16 21-15",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/25",
+      "drawId": 23,
+      "draw": "SF U13-U15 C - Groupe A",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Fien Deforche",
+            "playerTsId": "92",
+            "memberId": "51929309"
+          }
+        ],
+        [
+          {
+            "name": "Jeanne Bia",
+            "playerTsId": "99",
+            "memberId": "30009886"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-23 21-15 21-18",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/26",
+      "drawId": 24,
+      "draw": "SF U13-U15 C - Groupe B",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Léandra Reiss",
+            "playerTsId": "25",
+            "memberId": "30090081"
+          }
+        ],
+        [
+          {
+            "name": "Sharvari Soman",
+            "playerTsId": "10",
+            "memberId": "30008463"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "15-21 19-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/27",
+      "drawId": 6,
+      "draw": "SG U13 C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Ruthvik Sai Kurra",
+            "playerTsId": "101",
+            "memberId": "30000735"
+          }
+        ],
+        [
+          {
+            "name": "Damien Vryghem",
+            "playerTsId": "13",
+            "memberId": "30064004"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "12-21 11-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/28",
+      "drawId": 6,
+      "draw": "SG U13 C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Bastien Jaugey",
+            "playerTsId": "5",
+            "memberId": "30067395"
+          }
+        ],
+        [
+          {
+            "name": "Zachary Gentile",
+            "playerTsId": "32",
+            "memberId": "30007027"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "12-21 22-24",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/29",
+      "drawId": 43,
+      "draw": "SG U17 C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Léandro Castro Morais",
+            "playerTsId": "21",
+            "memberId": "30078037"
+          }
+        ],
+        [
+          {
+            "name": "Robin Deforche",
+            "playerTsId": "93",
+            "memberId": "50477072"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-10 21-16",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/30",
+      "drawId": 43,
+      "draw": "SG U17 C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Rui Hé",
+            "playerTsId": "36",
+            "memberId": "30000129"
+          }
+        ],
+        [
+          {
+            "name": "Victor Kinard",
+            "playerTsId": "23",
+            "memberId": "30061535"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "9-21 6-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/31",
+      "drawId": 36,
+      "draw": "SG U15 C & SF U17 C - Groupe A",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Tristan Reiss",
+            "playerTsId": "26",
+            "memberId": "30094483"
+          }
+        ],
+        [
+          {
+            "name": "Antoine Houtekiet",
+            "playerTsId": "66",
+            "memberId": "30095628"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-9 21-11",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/32",
+      "drawId": 37,
+      "draw": "SG U15 C & SF U17 C - Groupe B",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Alexandre Janssens",
+            "playerTsId": "58",
+            "memberId": "30077441"
+          }
+        ],
+        [
+          {
+            "name": "Emma Bartoli",
+            "playerTsId": "79",
+            "memberId": "24150522"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-13 21-13",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/33",
+      "drawId": 37,
+      "draw": "SG U15 C & SF U17 C - Groupe B",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Lucien Lambert",
+            "playerTsId": "42",
+            "memberId": "30077266"
+          }
+        ],
+        [
+          {
+            "name": "Liam Marcolungo",
+            "playerTsId": "61",
+            "memberId": "10527991"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "",
+      "walkover": true,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/34",
+      "drawId": 38,
+      "draw": "SG U15 C & SF U17 C - Groupe C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Kameron Duriau",
+            "playerTsId": "3",
+            "memberId": "30075782"
+          }
+        ],
+        [
+          {
+            "name": "Sasha Alamat",
+            "playerTsId": "65",
+            "memberId": "30004212"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-8 21-10",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/35",
+      "drawId": 38,
+      "draw": "SG U15 C & SF U17 C - Groupe C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Cleo Van Dyck",
+            "playerTsId": "12",
+            "memberId": "30070529"
+          }
+        ],
+        [
+          {
+            "name": "Samuel Baquet",
+            "playerTsId": "19",
+            "memberId": "30070489"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "9-21 8-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/36",
+      "drawId": 56,
+      "draw": "SG U19 C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Lucas Petroons",
+            "playerTsId": "9",
+            "memberId": "51781050"
+          }
+        ],
+        [
+          {
+            "name": "Abel Debusscher",
+            "playerTsId": "22",
+            "memberId": "51235552"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-12 19-21 21-17",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/37",
+      "drawId": 56,
+      "draw": "SG U19 C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Elie Rozenberg",
+            "playerTsId": "62",
+            "memberId": "30000448"
+          }
+        ],
+        [
+          {
+            "name": "Yihanwidy Ye",
+            "playerTsId": "14",
+            "memberId": "8528308"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-7 21-13",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/38",
+      "drawId": 23,
+      "draw": "SF U13-U15 C - Groupe A",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Fien Deforche",
+            "playerTsId": "92",
+            "memberId": "51929309"
+          }
+        ],
+        [
+          {
+            "name": "Eleanore Reynaerts",
+            "playerTsId": "50",
+            "memberId": "30076526"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "19-21 21-10 15-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/39",
+      "drawId": 24,
+      "draw": "SF U13-U15 C - Groupe B",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Léandra Reiss",
+            "playerTsId": "25",
+            "memberId": "30090081"
+          }
+        ],
+        [
+          {
+            "name": "Jade Bartoli",
+            "playerTsId": "78",
+            "memberId": "24148535"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "6-21 7-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/40",
+      "drawId": 6,
+      "draw": "SG U13 C",
+      "round": "Tour 4",
+      "teams": [
+        [
+          {
+            "name": "Victor Jaugey",
+            "playerTsId": "6",
+            "memberId": "30007917"
+          }
+        ],
+        [
+          {
+            "name": "Damien Vryghem",
+            "playerTsId": "13",
+            "memberId": "30064004"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "3-21 11-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/41",
+      "drawId": 6,
+      "draw": "SG U13 C",
+      "round": "Tour 4",
+      "teams": [
+        [
+          {
+            "name": "Ruthvik Sai Kurra",
+            "playerTsId": "101",
+            "memberId": "30000735"
+          }
+        ],
+        [
+          {
+            "name": "Bastien Jaugey",
+            "playerTsId": "5",
+            "memberId": "30067395"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-17 21-9",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/42",
+      "drawId": 43,
+      "draw": "SG U17 C",
+      "round": "Tour 4",
+      "teams": [
+        [
+          {
+            "name": "Sovanthy Lefebvre",
+            "playerTsId": "59",
+            "memberId": "30066970"
+          }
+        ],
+        [
+          {
+            "name": "Robin Deforche",
+            "playerTsId": "93",
+            "memberId": "50477072"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "17-21 11-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/43",
+      "drawId": 43,
+      "draw": "SG U17 C",
+      "round": "Tour 4",
+      "teams": [
+        [
+          {
+            "name": "Léandro Castro Morais",
+            "playerTsId": "21",
+            "memberId": "30078037"
+          }
+        ],
+        [
+          {
+            "name": "Rui Hé",
+            "playerTsId": "36",
+            "memberId": "30000129"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-12 21-10",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/44",
+      "drawId": 39,
+      "draw": "SG U15 C & SF U17 C - Position 01-03",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Alexandre Janssens",
+            "playerTsId": "58",
+            "memberId": "30077441"
+          }
+        ],
+        [
+          {
+            "name": "Samuel Baquet",
+            "playerTsId": "19",
+            "memberId": "30070489"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-11 21-10",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/45",
+      "drawId": 40,
+      "draw": "SG U15 C & SF U17 C - Position 04-06",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Lucien Lambert",
+            "playerTsId": "42",
+            "memberId": "30077266"
+          }
+        ],
+        [
+          {
+            "name": "Kameron Duriau",
+            "playerTsId": "3",
+            "memberId": "30075782"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "5-21 10-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/46",
+      "drawId": 41,
+      "draw": "SG U15 C & SF U17 C - Position 07-09",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Emma Bartoli",
+            "playerTsId": "79",
+            "memberId": "24150522"
+          }
+        ],
+        [
+          {
+            "name": "Cleo Van Dyck",
+            "playerTsId": "12",
+            "memberId": "30070529"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-7 21-9",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/47",
+      "drawId": 56,
+      "draw": "SG U19 C",
+      "round": "Tour 4",
+      "teams": [
+        [
+          {
+            "name": "Darren Zheng",
+            "playerTsId": "91",
+            "memberId": "30004590"
+          }
+        ],
+        [
+          {
+            "name": "Abel Debusscher",
+            "playerTsId": "22",
+            "memberId": "51235552"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "18-21 17-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/48",
+      "drawId": 56,
+      "draw": "SG U19 C",
+      "round": "Tour 4",
+      "teams": [
+        [
+          {
+            "name": "Lucas Petroons",
+            "playerTsId": "9",
+            "memberId": "51781050"
+          }
+        ],
+        [
+          {
+            "name": "Elie Rozenberg",
+            "playerTsId": "62",
+            "memberId": "30000448"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-17 20-22 22-20",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/49",
+      "drawId": 25,
+      "draw": "SF U13-U15 C - Position 1-4",
+      "round": "Demi finale",
+      "teams": [
+        [
+          {
+            "name": "Eleanore Reynaerts",
+            "playerTsId": "50",
+            "memberId": "30076526"
+          }
+        ],
+        [
+          {
+            "name": "Sharvari Soman",
+            "playerTsId": "10",
+            "memberId": "30008463"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-5 21-5",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/50",
+      "drawId": 25,
+      "draw": "SF U13-U15 C - Position 1-4",
+      "round": "Demi finale",
+      "teams": [
+        [
+          {
+            "name": "Fien Deforche",
+            "playerTsId": "92",
+            "memberId": "51929309"
+          }
+        ],
+        [
+          {
+            "name": "Jade Bartoli",
+            "playerTsId": "78",
+            "memberId": "24148535"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "9-21 6-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/51",
+      "drawId": 26,
+      "draw": "SF U13-U15 C - Position 5-6",
+      "round": "Finale",
+      "teams": [
+        [
+          {
+            "name": "Jeanne Bia",
+            "playerTsId": "99",
+            "memberId": "30009886"
+          }
+        ],
+        [
+          {
+            "name": "Léandra Reiss",
+            "playerTsId": "25",
+            "memberId": "30090081"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-12 21-12",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/52",
+      "drawId": 6,
+      "draw": "SG U13 C",
+      "round": "Tour 5",
+      "teams": [
+        [
+          {
+            "name": "Victor Jaugey",
+            "playerTsId": "6",
+            "memberId": "30007917"
+          }
+        ],
+        [
+          {
+            "name": "Bastien Jaugey",
+            "playerTsId": "5",
+            "memberId": "30067395"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "14-21 11-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/53",
+      "drawId": 6,
+      "draw": "SG U13 C",
+      "round": "Tour 5",
+      "teams": [
+        [
+          {
+            "name": "Ruthvik Sai Kurra",
+            "playerTsId": "101",
+            "memberId": "30000735"
+          }
+        ],
+        [
+          {
+            "name": "Zachary Gentile",
+            "playerTsId": "32",
+            "memberId": "30007027"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-13 21-11",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/54",
+      "drawId": 43,
+      "draw": "SG U17 C",
+      "round": "Tour 5",
+      "teams": [
+        [
+          {
+            "name": "Sovanthy Lefebvre",
+            "playerTsId": "59",
+            "memberId": "30066970"
+          }
+        ],
+        [
+          {
+            "name": "Rui Hé",
+            "playerTsId": "36",
+            "memberId": "30000129"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "13-21 10-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/55",
+      "drawId": 43,
+      "draw": "SG U17 C",
+      "round": "Tour 5",
+      "teams": [
+        [
+          {
+            "name": "Léandro Castro Morais",
+            "playerTsId": "21",
+            "memberId": "30078037"
+          }
+        ],
+        [
+          {
+            "name": "Victor Kinard",
+            "playerTsId": "23",
+            "memberId": "30061535"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-14 21-10",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/56",
+      "drawId": 39,
+      "draw": "SG U15 C & SF U17 C - Position 01-03",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Tristan Reiss",
+            "playerTsId": "26",
+            "memberId": "30094483"
+          }
+        ],
+        [
+          {
+            "name": "Alexandre Janssens",
+            "playerTsId": "58",
+            "memberId": "30077441"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "21-14 27-29 14-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/57",
+      "drawId": 40,
+      "draw": "SG U15 C & SF U17 C - Position 04-06",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "William Elias",
+            "playerTsId": "4",
+            "memberId": "30069820"
+          }
+        ],
+        [
+          {
+            "name": "Lucien Lambert",
+            "playerTsId": "42",
+            "memberId": "30077266"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "13-21 13-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/58",
+      "drawId": 41,
+      "draw": "SG U15 C & SF U17 C - Position 07-09",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Antoine Houtekiet",
+            "playerTsId": "66",
+            "memberId": "30095628"
+          }
+        ],
+        [
+          {
+            "name": "Emma Bartoli",
+            "playerTsId": "79",
+            "memberId": "24150522"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "7-21 5-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/59",
+      "drawId": 56,
+      "draw": "SG U19 C",
+      "round": "Tour 5",
+      "teams": [
+        [
+          {
+            "name": "Darren Zheng",
+            "playerTsId": "91",
+            "memberId": "30004590"
+          }
+        ],
+        [
+          {
+            "name": "Elie Rozenberg",
+            "playerTsId": "62",
+            "memberId": "30000448"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "13-21 21-18 21-17",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/60",
+      "drawId": 56,
+      "draw": "SG U19 C",
+      "round": "Tour 5",
+      "teams": [
+        [
+          {
+            "name": "Lucas Petroons",
+            "playerTsId": "9",
+            "memberId": "51781050"
+          }
+        ],
+        [
+          {
+            "name": "Yihanwidy Ye",
+            "playerTsId": "14",
+            "memberId": "8528308"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-12 21-15",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/61",
+      "drawId": 25,
+      "draw": "SF U13-U15 C - Position 1-4",
+      "round": "Finale",
+      "teams": [
+        [
+          {
+            "name": "Eleanore Reynaerts",
+            "playerTsId": "50",
+            "memberId": "30076526"
+          }
+        ],
+        [
+          {
+            "name": "Jade Bartoli",
+            "playerTsId": "78",
+            "memberId": "24148535"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "12-21 8-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/62",
+      "drawId": 39,
+      "draw": "SG U15 C & SF U17 C - Position 01-03",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Tristan Reiss",
+            "playerTsId": "26",
+            "memberId": "30094483"
+          }
+        ],
+        [
+          {
+            "name": "Samuel Baquet",
+            "playerTsId": "19",
+            "memberId": "30070489"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "",
+      "walkover": true,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/63",
+      "drawId": 40,
+      "draw": "SG U15 C & SF U17 C - Position 04-06",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "William Elias",
+            "playerTsId": "4",
+            "memberId": "30069820"
+          }
+        ],
+        [
+          {
+            "name": "Kameron Duriau",
+            "playerTsId": "3",
+            "memberId": "30075782"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "10-21 17-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/64",
+      "drawId": 41,
+      "draw": "SG U15 C & SF U17 C - Position 07-09",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Antoine Houtekiet",
+            "playerTsId": "66",
+            "memberId": "30095628"
+          }
+        ],
+        [
+          {
+            "name": "Cleo Van Dyck",
+            "playerTsId": "12",
+            "memberId": "30070529"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "",
+      "walkover": true,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/65",
+      "drawId": 27,
+      "draw": "DG U13-U15 C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Sasha Alamat",
+            "playerTsId": "65",
+            "memberId": "30004212"
+          },
+          {
+            "name": "Antoine Houtekiet",
+            "playerTsId": "66",
+            "memberId": "30095628"
+          }
+        ],
+        [
+          {
+            "name": "Zachary Gentile",
+            "playerTsId": "32",
+            "memberId": "30007027"
+          },
+          {
+            "name": "Victor Jaugey",
+            "playerTsId": "6",
+            "memberId": "30007917"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-11 21-10",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/66",
+      "drawId": 27,
+      "draw": "DG U13-U15 C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Kameron Duriau",
+            "playerTsId": "3",
+            "memberId": "30075782"
+          },
+          {
+            "name": "Lucien Lambert",
+            "playerTsId": "42",
+            "memberId": "30077266"
+          }
+        ],
+        [
+          {
+            "name": "Bastien Jaugey",
+            "playerTsId": "5",
+            "memberId": "30067395"
+          },
+          {
+            "name": "Damien Vryghem",
+            "playerTsId": "13",
+            "memberId": "30064004"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-14 21-3",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/67",
+      "drawId": 55,
+      "draw": "DG U17-U19 C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "William Elias",
+            "playerTsId": "4",
+            "memberId": "30069820"
+          },
+          {
+            "name": "Victor Kinard",
+            "playerTsId": "23",
+            "memberId": "30061535"
+          }
+        ],
+        [
+          {
+            "name": "Samuel Baquet",
+            "playerTsId": "19",
+            "memberId": "30070489"
+          },
+          {
+            "name": "Léandro Castro Morais",
+            "playerTsId": "21",
+            "memberId": "30078037"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "9-21 11-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/68",
+      "drawId": 55,
+      "draw": "DG U17-U19 C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Alexandre Janssens",
+            "playerTsId": "58",
+            "memberId": "30077441"
+          },
+          {
+            "name": "Tristan Reiss",
+            "playerTsId": "26",
+            "memberId": "30094483"
+          }
+        ],
+        [
+          {
+            "name": "Abel Debusscher",
+            "playerTsId": "22",
+            "memberId": "51235552"
+          },
+          {
+            "name": "Lucas Petroons",
+            "playerTsId": "9",
+            "memberId": "51781050"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "",
+      "walkover": true,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/69",
+      "drawId": 65,
+      "draw": "DF U15-U17 C",
+      "round": "Tour 1",
+      "teams": [
+        [
+          {
+            "name": "Jeanne Bia",
+            "playerTsId": "99",
+            "memberId": "30009886"
+          },
+          {
+            "name": "Anika Wakankar",
+            "playerTsId": "90",
+            "memberId": "10447025"
+          }
+        ],
+        [
+          {
+            "name": "Emma Bartoli",
+            "playerTsId": "79",
+            "memberId": "24150522"
+          },
+          {
+            "name": "Jade Bartoli",
+            "playerTsId": "78",
+            "memberId": "24148535"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "8-21 5-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/70",
+      "drawId": 27,
+      "draw": "DG U13-U15 C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Kameron Duriau",
+            "playerTsId": "3",
+            "memberId": "30075782"
+          },
+          {
+            "name": "Lucien Lambert",
+            "playerTsId": "42",
+            "memberId": "30077266"
+          }
+        ],
+        [
+          {
+            "name": "Sasha Alamat",
+            "playerTsId": "65",
+            "memberId": "30004212"
+          },
+          {
+            "name": "Antoine Houtekiet",
+            "playerTsId": "66",
+            "memberId": "30095628"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-12 21-13",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/71",
+      "drawId": 27,
+      "draw": "DG U13-U15 C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Zachary Gentile",
+            "playerTsId": "32",
+            "memberId": "30007027"
+          },
+          {
+            "name": "Victor Jaugey",
+            "playerTsId": "6",
+            "memberId": "30007917"
+          }
+        ],
+        [
+          {
+            "name": "Bastien Jaugey",
+            "playerTsId": "5",
+            "memberId": "30067395"
+          },
+          {
+            "name": "Damien Vryghem",
+            "playerTsId": "13",
+            "memberId": "30064004"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "16-21 17-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/72",
+      "drawId": 55,
+      "draw": "DG U17-U19 C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Alexandre Janssens",
+            "playerTsId": "58",
+            "memberId": "30077441"
+          },
+          {
+            "name": "Tristan Reiss",
+            "playerTsId": "26",
+            "memberId": "30094483"
+          }
+        ],
+        [
+          {
+            "name": "William Elias",
+            "playerTsId": "4",
+            "memberId": "30069820"
+          },
+          {
+            "name": "Victor Kinard",
+            "playerTsId": "23",
+            "memberId": "30061535"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "",
+      "walkover": true,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/73",
+      "drawId": 55,
+      "draw": "DG U17-U19 C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Samuel Baquet",
+            "playerTsId": "19",
+            "memberId": "30070489"
+          },
+          {
+            "name": "Léandro Castro Morais",
+            "playerTsId": "21",
+            "memberId": "30078037"
+          }
+        ],
+        [
+          {
+            "name": "Abel Debusscher",
+            "playerTsId": "22",
+            "memberId": "51235552"
+          },
+          {
+            "name": "Lucas Petroons",
+            "playerTsId": "9",
+            "memberId": "51781050"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-11 21-18",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/74",
+      "drawId": 65,
+      "draw": "DF U15-U17 C",
+      "round": "Tour 2",
+      "teams": [
+        [
+          {
+            "name": "Camille Ciulla",
+            "playerTsId": "37",
+            "memberId": "30096186"
+          },
+          {
+            "name": "Eleanore Reynaerts",
+            "playerTsId": "50",
+            "memberId": "30076526"
+          }
+        ],
+        [
+          {
+            "name": "Jeanne Bia",
+            "playerTsId": "99",
+            "memberId": "30009886"
+          },
+          {
+            "name": "Anika Wakankar",
+            "playerTsId": "90",
+            "memberId": "10447025"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "22-24 20-22",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/75",
+      "drawId": 27,
+      "draw": "DG U13-U15 C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Kameron Duriau",
+            "playerTsId": "3",
+            "memberId": "30075782"
+          },
+          {
+            "name": "Lucien Lambert",
+            "playerTsId": "42",
+            "memberId": "30077266"
+          }
+        ],
+        [
+          {
+            "name": "Zachary Gentile",
+            "playerTsId": "32",
+            "memberId": "30007027"
+          },
+          {
+            "name": "Victor Jaugey",
+            "playerTsId": "6",
+            "memberId": "30007917"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-6 21-3",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/76",
+      "drawId": 27,
+      "draw": "DG U13-U15 C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Sasha Alamat",
+            "playerTsId": "65",
+            "memberId": "30004212"
+          },
+          {
+            "name": "Antoine Houtekiet",
+            "playerTsId": "66",
+            "memberId": "30095628"
+          }
+        ],
+        [
+          {
+            "name": "Bastien Jaugey",
+            "playerTsId": "5",
+            "memberId": "30067395"
+          },
+          {
+            "name": "Damien Vryghem",
+            "playerTsId": "13",
+            "memberId": "30064004"
+          }
+        ]
+      ],
+      "winnerTeam": 0,
+      "score": "21-17 17-21 21-14",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/77",
+      "drawId": 55,
+      "draw": "DG U17-U19 C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Alexandre Janssens",
+            "playerTsId": "58",
+            "memberId": "30077441"
+          },
+          {
+            "name": "Tristan Reiss",
+            "playerTsId": "26",
+            "memberId": "30094483"
+          }
+        ],
+        [
+          {
+            "name": "Samuel Baquet",
+            "playerTsId": "19",
+            "memberId": "30070489"
+          },
+          {
+            "name": "Léandro Castro Morais",
+            "playerTsId": "21",
+            "memberId": "30078037"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "",
+      "walkover": true,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/78",
+      "drawId": 55,
+      "draw": "DG U17-U19 C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "William Elias",
+            "playerTsId": "4",
+            "memberId": "30069820"
+          },
+          {
+            "name": "Victor Kinard",
+            "playerTsId": "23",
+            "memberId": "30061535"
+          }
+        ],
+        [
+          {
+            "name": "Abel Debusscher",
+            "playerTsId": "22",
+            "memberId": "51235552"
+          },
+          {
+            "name": "Lucas Petroons",
+            "playerTsId": "9",
+            "memberId": "51781050"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "20-22 15-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    },
+    {
+      "id": "c526a121-b847-470f-97f0-589fe215e1d7/79",
+      "drawId": 65,
+      "draw": "DF U15-U17 C",
+      "round": "Tour 3",
+      "teams": [
+        [
+          {
+            "name": "Camille Ciulla",
+            "playerTsId": "37",
+            "memberId": "30096186"
+          },
+          {
+            "name": "Eleanore Reynaerts",
+            "playerTsId": "50",
+            "memberId": "30076526"
+          }
+        ],
+        [
+          {
+            "name": "Emma Bartoli",
+            "playerTsId": "79",
+            "memberId": "24150522"
+          },
+          {
+            "name": "Jade Bartoli",
+            "playerTsId": "78",
+            "memberId": "24148535"
+          }
+        ]
+      ],
+      "winnerTeam": 1,
+      "score": "5-21 7-21",
+      "walkover": false,
+      "reviewRequired": false,
+      "sourceUrl": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7/Matches"
+    }
+  ]
+}
