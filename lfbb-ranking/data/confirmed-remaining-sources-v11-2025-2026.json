@@ -1,0 +1,109 @@
+{
+  "version": 11,
+  "season": "2025-2026",
+  "status": "PARTIALLY_RECONSTRUCTED_NOT_OFFICIAL",
+  "officialPublicationAllowed": false,
+  "sourceIdentity": "TournamentSoftware URL user-provided 2026-11-09",
+  "sourceLinks": [
+    {
+      "name": "Léglise C",
+      "level": "C",
+      "date": "2026-01-04",
+      "tournamentId": "c92195aa-eccf-42b2-99a3-a8169828e752",
+      "url": "https://lfbb.tournamentsoftware.com/tournament/C92195AA-ECCF-42B2-99A3-A8169828E752",
+      "status": "URL_CONFIRMED_AWAITING_MATCH_PAGE_EXTRACTION",
+      "historicalRecords": 32,
+      "historicalPointsOnlyForAudit": 285
+    },
+    {
+      "name": "Enghien C",
+      "level": "C",
+      "date": "2026-01-31",
+      "tournamentId": "364d64f9-7854-40d6-bf68-a314dbaf8d5a",
+      "url": "https://lfbb.tournamentsoftware.com/tournament/364D64F9-7854-40D6-BF68-A314DBAF8D5A",
+      "status": "URL_CONFIRMED_AWAITING_MATCH_PAGE_EXTRACTION",
+      "historicalRecords": 28,
+      "historicalPointsOnlyForAudit": 329
+    },
+    {
+      "name": "Les Volants D",
+      "level": "D provisional",
+      "date": "2026-01-18",
+      "tournamentId": "5619583f-888a-4063-9f21-0c1d27ba1e87",
+      "url": "https://lfbb.tournamentsoftware.com/tournament/5619583F-888A-4063-9F21-0C1D27BA1E87",
+      "status": "V8_MATCHES_RECONSTRUCTED_AWAITING_2_PLAYERS_LEVEL_VALIDATION",
+      "matchesCapturedYouthSingles": 92,
+      "registeredNamesInMatches": 52,
+      "WOOnlyExcludedFromParticipants": 2,
+      "playedParticipants": 50,
+      "singlesEvents": 8,
+      "ageMajorityMergedU13U15": {
+        "U15": 6,
+        "U13": 2,
+        "U11": 1,
+        "rankingAge": "U15"
+      },
+      "computedSportsTotals": {
+        "rankingD": 147,
+        "rankingC": 0,
+        "promotionDToC": 27
+      },
+      "totalsWithoutPriorCUnverified": {
+        "rankingD": 137,
+        "rankingC": 0,
+        "promotionDToC": 25
+      },
+      "suspectedCAtTournament": [
+        {
+          "memberId": "30071851",
+          "name": "Sahra Sahin",
+          "prevRanking": "C",
+          "age2025": "U17",
+          "age2026": "U17",
+          "rankingPointsAtEvent": 0,
+          "promotionPoints": 0,
+          "status": "human_review_required"
+        },
+        {
+          "memberId": "30098406",
+          "name": "Marius Mataisse",
+          "prevRanking": "C",
+          "age2025": "U15",
+          "age2026": "U15",
+          "rankingPointsAtEvent": 10,
+          "promotionPoints": 2,
+          "status": "human_review_required"
+        }
+      ],
+      "WOOnly": [
+        {
+          "memberId": "30004195",
+          "name": "Charlie Brehain"
+        },
+        {
+          "memberId": "10513265",
+          "name": "Abigael Janssens"
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "onlySingles": true,
+    "mixedSexSinglesAllowed": true,
+    "perActualDraw": true,
+    "actualParticipants": "unique players in at least one scored non-WO match",
+    "useTSEventsForInventoryNotStandings": true,
+    "TSStandingsAreForbidden": true,
+    "rankingsDAndCSeparate": true,
+    "promotionFromDSeparate": true,
+    "BrusselsDOnlyHistoricalFallback": true,
+    "noOfficialEditWithoutHumanApproval": true
+  },
+  "pendingTasks": [
+    "Extract Léglise C matches directly with confirmed TS URL",
+    "Extract Enghien C matches directly with confirmed TS URL",
+    "Verify official D/C youth status of Sahra Sahin and Marius Mataisse on 2026-01-18",
+    "Recalculate season totals after source imports, ensure no duplicate tournament+event+player"
+  ],
+  "note": "Les Volants totals independently reconstructed from matches and equal historical D values (147 ranking D/27 promotion), but two prior-C players require validation. No TS standings used."
+}
