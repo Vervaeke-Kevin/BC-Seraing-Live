@@ -1,0 +1,114 @@
+{
+  "version": 10,
+  "season": "2025-2026",
+  "status": "NOT_COMPLETE_DO_NOT_PUBLISH_OFFICIAL",
+  "method": "Comparaison par tournoi et niveau; les positions TS affichees sont interdites comme source de points",
+  "historicalReference": "TJ025-26 > Resultats, U9 exclus",
+  "historicalSheetSums": {
+    "D": 3884,
+    "C": 3966
+  },
+  "userReportedTotals": {
+    "D": 3820,
+    "C": 3923
+  },
+  "v9CalculatedTotals": {
+    "D": 2948,
+    "C": 1411
+  },
+  "absentLevels": [
+    [
+      "Ciney",
+      "C",
+      "2026-04-12",
+      374
+    ],
+    [
+      "Enghien",
+      "C",
+      "2026-01-31",
+      329
+    ],
+    [
+      "BEC",
+      "C",
+      "2026-05-14",
+      319
+    ],
+    [
+      "Manage",
+      "C",
+      "2026-02-28",
+      295
+    ],
+    [
+      "Ecaussinnes",
+      "C",
+      "2026-03-21",
+      289
+    ],
+    [
+      "Leglise",
+      "C",
+      "2026-01-04",
+      285
+    ],
+    [
+      "Soignies",
+      "C",
+      "2026-02-08",
+      253
+    ],
+    [
+      "Bad79",
+      "C",
+      "2026-01-17",
+      238
+    ],
+    [
+      "Villers-Wanze",
+      "C",
+      "2026-03-21",
+      151
+    ],
+    [
+      "Grace",
+      "D",
+      "2026-05-16",
+      150
+    ],
+    [
+      "Les Volants",
+      "D",
+      "2026-01-18",
+      147
+    ],
+    [
+      "Rixensart",
+      "D",
+      "2026-03-14",
+      134
+    ],
+    [
+      "Ecaussinnes",
+      "D",
+      "2026-03-21",
+      117
+    ]
+  ],
+  "sourceMissingHistoricalPoints": {
+    "D": 548,
+    "C": 2533
+  },
+  "userReportedDifferenceAgainstV9": {
+    "D": 872,
+    "C": 2512
+  },
+  "notes": [
+    "L'ancien fichier sert a detecter les sources absentes, pas a reprendre les points, sauf Brussels D historique explicitement valide.",
+    "Un evenement D n'est jamais une preuve de couverture du tournoi C.",
+    "Les tableaux classes TS ne sont jamais une source d'attribution de places.",
+    "Verrou obligatoire avant publication definitive: sources D/C, participants, phases, WO, places, puis validation humaine."
+  ],
+  "updated": "2026-11-09"
+}
