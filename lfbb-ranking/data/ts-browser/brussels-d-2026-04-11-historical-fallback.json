@@ -1,5 +1,5 @@
 {
-  "status": "historical_exception_pending_human_validation",
+  "status": "historical_exception_with_membership_audit_pending_human_validation",
   "tournament": {
     "id": "19999F28-5BCF-4C66-A431-9E28901D5056",
     "name": "Brussels jeunes D",
@@ -14,7 +14,8 @@
     "isRecalculatedFromTsMatches": false,
     "reason": "TournamentSoftware Brussels D Matches URL returned HTTP 500",
     "appliesOnlyTo": "Brussels D",
-    "doesNotReplace": "Brussels C results extracted from TournamentSoftware"
+    "doesNotReplace": "Brussels C results extracted from TournamentSoftware",
+    "membersCrossCheck": "DATA_LFBB_Membres: Membres_RBBF_Jeunes, 25-26 Membres_RBBF_Jeunes, LFBB_Membre, Membre-Nov25 (2026-11-09)"
   },
   "policy": {
     "excludeExclusiveU9": true,
@@ -88,7 +89,14 @@
         "pointsRankingD": 0,
         "pointsPromotionToC": 0
       }
-    ]
+    ],
+    "memberLookup": {
+      "certain": 2,
+      "probable": 2,
+      "unmatched": 15,
+      "rowsWithoutConfirmedMemberId": 17,
+      "missingAfterUniqueProbableResolution": 15
+    }
   },
   "rows": [
     {
@@ -101,7 +109,11 @@
       "participants": 6,
       "pointsRankingD": 2,
       "pointsPromotionToC": 2,
-      "actualAgeCategory": "U11"
+      "actualAgeCategory": "U11",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1408,
@@ -113,7 +125,11 @@
       "participants": 6,
       "pointsRankingD": 1,
       "pointsPromotionToC": 1,
-      "actualAgeCategory": "U11"
+      "actualAgeCategory": "U11",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1409,
@@ -125,7 +141,11 @@
       "participants": 6,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U11"
+      "actualAgeCategory": "U11",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1410,
@@ -137,7 +157,16 @@
       "participants": 6,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "probable_identity_requires_validation",
+        "candidateMemberId": "7974778",
+        "sourceSheet": "Membre-Nov25",
+        "sourceRow": 1023,
+        "affiliationStart": "2024-10-10",
+        "sourceName": "Lamallam Mohamed Sabri",
+        "note": "Nom et prénom semblent inversés et orthographe Lanallan/Lamallam; correspondance probable, non certifiée."
+      }
     },
     {
       "sourceRow": 1411,
@@ -149,7 +178,11 @@
       "participants": 6,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1412,
@@ -161,7 +194,11 @@
       "participants": 6,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1418,
@@ -173,7 +210,11 @@
       "participants": 10,
       "pointsRankingD": 8,
       "pointsPromotionToC": 4,
-      "actualAgeCategory": "U13"
+      "actualAgeCategory": "U13",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1419,
@@ -185,7 +226,11 @@
       "participants": 10,
       "pointsRankingD": 6,
       "pointsPromotionToC": 2,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1420,
@@ -197,7 +242,11 @@
       "participants": 10,
       "pointsRankingD": 5,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1421,
@@ -209,7 +258,11 @@
       "participants": 10,
       "pointsRankingD": 5,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U13"
+      "actualAgeCategory": "U13",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1422,
@@ -221,7 +274,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U13"
+      "actualAgeCategory": "U13",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1423,
@@ -233,7 +290,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1424,
@@ -245,7 +306,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U13"
+      "actualAgeCategory": "U13",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1425,
@@ -257,7 +322,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1426,
@@ -269,7 +338,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1427,
@@ -281,7 +354,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1428,
@@ -293,7 +370,11 @@
       "participants": 7,
       "pointsRankingD": 4,
       "pointsPromotionToC": 2,
-      "actualAgeCategory": "U13"
+      "actualAgeCategory": "U13",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1429,
@@ -305,7 +386,11 @@
       "participants": 7,
       "pointsRankingD": 3,
       "pointsPromotionToC": 1,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1430,
@@ -317,7 +402,11 @@
       "participants": 7,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U13"
+      "actualAgeCategory": "U13",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1431,
@@ -329,7 +418,11 @@
       "participants": 7,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U13"
+      "actualAgeCategory": "U13",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1432,
@@ -341,7 +434,11 @@
       "participants": 7,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U13"
+      "actualAgeCategory": "U13",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1433,
@@ -353,7 +450,11 @@
       "participants": 7,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U13"
+      "actualAgeCategory": "U13",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1434,
@@ -365,7 +466,11 @@
       "participants": 7,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1441,
@@ -377,7 +482,11 @@
       "participants": 9,
       "pointsRankingD": 12,
       "pointsPromotionToC": 4,
-      "actualAgeCategory": "U15"
+      "actualAgeCategory": "U15",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1442,
@@ -389,7 +498,11 @@
       "participants": 9,
       "pointsRankingD": 10,
       "pointsPromotionToC": 2,
-      "actualAgeCategory": "U15"
+      "actualAgeCategory": "U15",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1443,
@@ -401,11 +514,15 @@
       "participants": 9,
       "pointsRankingD": 7,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U15"
+      "actualAgeCategory": "U15",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1444,
-      "memberId": null,
+      "memberId": "12210897",
       "playerName": "Rodrigo Bennici",
       "category": "U15",
       "rankFrom": 4,
@@ -413,7 +530,14 @@
       "participants": 9,
       "pointsRankingD": 7,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "exact_identity_found_affiliation_at_tournament_unverified",
+        "sourceSheet": "Membres_RBBF_Jeunes",
+        "sourceRow": 5549,
+        "affiliationStart": "2026-09-16",
+        "note": "Licence retrouvée, affiliation enregistrée après Brussels du 11 avril 2026."
+      }
     },
     {
       "sourceRow": 1445,
@@ -425,7 +549,11 @@
       "participants": 9,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U15"
+      "actualAgeCategory": "U15",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1446,
@@ -437,7 +565,11 @@
       "participants": 9,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U15"
+      "actualAgeCategory": "U15",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1447,
@@ -449,7 +581,16 @@
       "participants": 9,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "probable_identity_requires_validation",
+        "candidateMemberId": "7974933",
+        "sourceSheet": "Membre-Nov25",
+        "sourceRow": 1035,
+        "affiliationStart": "2024-10-10",
+        "sourceName": "Hugo Deleu Lamilhau",
+        "note": "Différence d'orthographe Lamihau/Lamilhau; correspondance probable, non certifiée."
+      }
     },
     {
       "sourceRow": 1448,
@@ -461,7 +602,11 @@
       "participants": 9,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U15"
+      "actualAgeCategory": "U15",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1449,
@@ -473,7 +618,11 @@
       "participants": 9,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1450,
@@ -485,11 +634,15 @@
       "participants": 5,
       "pointsRankingD": 6,
       "pointsPromotionToC": 2,
-      "actualAgeCategory": "U15"
+      "actualAgeCategory": "U15",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1451,
-      "memberId": null,
+      "memberId": "11763654",
       "playerName": "Emma Deby",
       "category": "U15",
       "rankFrom": 2,
@@ -497,7 +650,14 @@
       "participants": 5,
       "pointsRankingD": 5,
       "pointsPromotionToC": 1,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "exact_identity_found_affiliation_at_tournament_unverified",
+        "sourceSheet": "Membres_RBBF_Jeunes",
+        "sourceRow": 7782,
+        "affiliationStart": "2026-05-05",
+        "note": "Licence retrouvée, affiliation enregistrée après Brussels du 11 avril 2026."
+      }
     },
     {
       "sourceRow": 1452,
@@ -509,7 +669,11 @@
       "participants": 5,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U15"
+      "actualAgeCategory": "U15",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1453,
@@ -521,7 +685,11 @@
       "participants": 5,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U15"
+      "actualAgeCategory": "U15",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1454,
@@ -533,7 +701,11 @@
       "participants": 5,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1471,
@@ -545,7 +717,11 @@
       "participants": 10,
       "pointsRankingD": 18,
       "pointsPromotionToC": 4,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1472,
@@ -557,7 +733,11 @@
       "participants": 10,
       "pointsRankingD": 14,
       "pointsPromotionToC": 2,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1473,
@@ -569,7 +749,11 @@
       "participants": 10,
       "pointsRankingD": 11,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1474,
@@ -581,7 +765,11 @@
       "participants": 10,
       "pointsRankingD": 11,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1475,
@@ -593,7 +781,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1476,
@@ -605,7 +797,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1477,
@@ -617,7 +813,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1478,
@@ -629,7 +829,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1479,
@@ -641,7 +845,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1480,
@@ -653,7 +861,11 @@
       "participants": 10,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "Membre?"
+      "actualAgeCategory": "Membre?",
+      "licenceCrossCheck": {
+        "status": "not_in_current_or_nov2025_member_export",
+        "note": "Joueur non retrouvé par correspondance nominale dans les exports membres actuels, 2025-2026 et novembre 2025. Absence de licence ne démontre pas à elle seule la date de fin d'affiliation."
+      }
     },
     {
       "sourceRow": 1481,
@@ -665,7 +877,11 @@
       "participants": 8,
       "pointsRankingD": 18,
       "pointsPromotionToC": 4,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1482,
@@ -677,7 +893,11 @@
       "participants": 8,
       "pointsRankingD": 14,
       "pointsPromotionToC": 2,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1483,
@@ -689,7 +909,11 @@
       "participants": 8,
       "pointsRankingD": 11,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1484,
@@ -701,7 +925,11 @@
       "participants": 8,
       "pointsRankingD": 11,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1485,
@@ -713,7 +941,11 @@
       "participants": 8,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1486,
@@ -725,7 +957,11 @@
       "participants": 8,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U17"
+      "actualAgeCategory": "U17",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1487,
@@ -737,7 +973,11 @@
       "participants": 8,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U19"
+      "actualAgeCategory": "U19",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1488,
@@ -749,7 +989,11 @@
       "participants": 8,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U19"
+      "actualAgeCategory": "U19",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1494,
@@ -761,7 +1005,11 @@
       "participants": 2,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U19"
+      "actualAgeCategory": "U19",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     },
     {
       "sourceRow": 1495,
@@ -773,7 +1021,11 @@
       "participants": 2,
       "pointsRankingD": 0,
       "pointsPromotionToC": 0,
-      "actualAgeCategory": "U19"
+      "actualAgeCategory": "U19",
+      "licenceCrossCheck": {
+        "status": "present_in_historical_results",
+        "verifiedFromMembersFile": false
+      }
     }
   ],
   "excludedRowsForAudit": {
