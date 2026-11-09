@@ -1,0 +1,21 @@
+{
+  "season": "2025-2026",
+  "date": "2026-04-11",
+  "status": "audit_not_official",
+  "tournaments": [
+    {
+      "name": "Brussels D",
+      "url": "https://lfbb.tournamentsoftware.com/tournament/19999F28-5BCF-4C66-A431-9E28901D5056",
+      "level": "D",
+      "importStatus": "blocked_v8",
+      "notes": "URL correcte. V8 a reçu une page non exploitable / protection d'accès et n'a importé aucun match."
+    },
+    {
+      "name": "Brussels C",
+      "url": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7",
+      "level": "C",
+      "importStatus": "pending",
+      "notes": "Tournoi C distinct, même date; 34 inscriptions sur fiche TS. Aucun match encore importé."
+    }
+  ]
+}
