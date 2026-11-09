@@ -1,0 +1,49 @@
+{
+  "version": "v10-singles-only-audit-2026-11-09",
+  "source": "RESULTATS-LFBB-SOURCES-MANQUANTES-V10.zip, matches and draw labels; not TS standings",
+  "status": "V10_MATCHES_FILTERED_POINTS_NOT_YET_RECALCULATED",
+  "original": {
+    "sourcesImported": 10,
+    "matches": 636
+  },
+  "filter": {
+    "eligibleDiscipline": "singles",
+    "singlesMatches": 563,
+    "excludedDoublesMatches": 73,
+    "drawsKept": 126,
+    "doublesDrawsExcluded": 20,
+    "actualEventsProvisionallyGrouped": 47
+  },
+  "detectedProblems": {
+    "Ciney C": {
+      "excludedDoublesMatches": 23
+    },
+    "Manage C": {
+      "excludedDoublesMatches": 16
+    },
+    "Bad79 C": {
+      "excludedDoublesMatches": 18,
+      "mislabelledDoublesDraws": 3
+    },
+    "Écaussinnes C": {
+      "excludedDoublesMatches": 16,
+      "mislabelledDoublesDraws": 5
+    }
+  },
+  "policy": {
+    "onlySingles": true,
+    "boysGirlsCanCompeteTogether": true,
+    "separateSinglesDrawsMustNotBeMergedEvenIfAgeAndLevelMatch": true,
+    "participationNumber": "count unique players per actual single event, excluding WO-only players",
+    "TS_Events": "inventory of actual events; registration count includes WOs",
+    "TS_Standings": "forbidden as source of placements",
+    "historicalException": "Brussels D only"
+  },
+  "remainingSources": [
+    "Léglise C",
+    "Enghien C",
+    "Les Volants D"
+  ],
+  "note": "The previously reported 636 were source matches, not 636 ranking-eligible singles. The earlier V9 ranking points have not been fully recalculated after this V10 correction. Provisional event groupings need TS Events identity cross-check.",
+  "updated": "2026-11-09"
+}
