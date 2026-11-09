@@ -1,0 +1,33 @@
+{
+  "title": "LFBB jeunes 2025–2026 — premier lot, non officiel",
+  "rulesVersion": "lfbb-d-c-2025-08-01",
+  "tournaments": [
+    {
+      "name": "K2 D",
+      "date": "2025-11-23",
+      "url": "https://lfbb.tournamentsoftware.com/tournament/097fa3b4-66d1-4fb6-a62a-b6dd46b8b3f0",
+      "onlyOfficialLevel": "D"
+    },
+    {
+      "name": "Waremme D",
+      "date": "2025-11-22",
+      "url": "https://lfbb.tournamentsoftware.com/tournament/aad1f561-e3f7-45cb-8c45-e7027c7223d1",
+      "onlyOfficialLevel": "D"
+    },
+    {
+      "name": "Waremme C",
+      "date": "2025-11-22",
+      "url": "https://lfbb.tournamentsoftware.com/tournament/FE9DC58F-F969-4806-A08F-518D3B4C9B43",
+      "onlyOfficialLevel": "C"
+    },
+    {
+      "name": "Attert D — C amical exclu",
+      "date": "2026-03-28",
+      "url": "https://lfbb.tournamentsoftware.com/tournament/2790EC1C-7941-4924-9F91-720A85D9CC5B",
+      "onlyOfficialLevel": "D",
+      "excludeLevels": [
+        "C"
+      ]
+    }
+  ]
+}
