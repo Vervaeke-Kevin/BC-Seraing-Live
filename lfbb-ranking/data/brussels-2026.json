@@ -7,15 +7,17 @@
       "name": "Brussels D",
       "url": "https://lfbb.tournamentsoftware.com/tournament/19999F28-5BCF-4C66-A431-9E28901D5056",
       "level": "D",
-      "importStatus": "blocked_v8",
-      "notes": "URL correcte. V8 a reçu une page non exploitable / protection d'accès et n'a importé aucun match."
+      "importStatus": "historical_sheet_fallback_pending_validation",
+      "notes": "TS /Matches HTTP 500; 57 U11–U19 D rows sourced only from historical TJ025-26. Exclusive U9 excluded; 19 entries without Member ID require cross-check. Ranking and promotion points sourced from old spreadsheet, not TS recalculation.",
+      "dataPath": "lfbb-ranking/data/ts-browser/brussels-d-2026-04-11-historical-fallback.json"
     },
     {
       "name": "Brussels C",
       "url": "https://lfbb.tournamentsoftware.com/tournament/c526a121-b847-470f-97f0-589fe215e1d7",
       "level": "C",
-      "importStatus": "pending",
-      "notes": "Tournoi C distinct, même date; 34 inscriptions sur fiche TS. Aucun match encore importé."
+      "importStatus": "ts_matches_captured_pending_placement_audit",
+      "notes": "79 TS match rows captured separately; historical sheet C excluded from fallback.",
+      "dataPath": "lfbb-ranking/data/ts-browser/brussels-c-2026-04-11.json"
     }
   ]
 }
