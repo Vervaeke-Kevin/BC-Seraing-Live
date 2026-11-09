@@ -1,0 +1,89 @@
+{
+  "version": 11,
+  "date": "2026-11-09",
+  "status": "PROVISIONAL_PARTIAL_NOT_OFFICIAL",
+  "sources": [
+    {
+      "tournament": "Enghien C",
+      "tournamentId": "364d64f9-7854-40d6-bf68-a314dbaf8d5a",
+      "matches": 43,
+      "playersWithPlayedMatch": 28,
+      "woOnly": 1,
+      "events": 4,
+      "calculatedRows": 28,
+      "pendingRows": 0,
+      "pointsRankingC": 335,
+      "historicalComparator": 329,
+      "delta": 6,
+      "reason": "Two 2nd-place pool finishers correctly assigned places 3-4 in U17 singles"
+    },
+    {
+      "tournament": "Léglise C",
+      "tournamentId": "c92195aa-eccf-42b2-99a3-a8169828e752",
+      "matches": 55,
+      "playersWithPlayedMatch": 32,
+      "woOnly": 0,
+      "events": 5,
+      "calculatedRows": 28,
+      "pendingRows": 4,
+      "pointsRankingC": 237,
+      "historicalComparator": 285,
+      "pendingScoreRange": {
+        "min": 36,
+        "max": 48
+      },
+      "reason": "U15-U17 boys players without final classification matches span 7-10; different point bands"
+    },
+    {
+      "tournament": "Les Volants D",
+      "tournamentId": "5619583f-888a-4063-9f21-0c1d27ba1e87",
+      "matches": 92,
+      "playersWithPlayedMatch": 50,
+      "woOnly": 2,
+      "calculatedRows": 48,
+      "eligibilityPendingRows": 2,
+      "pointsRankingDConfirmed": 137,
+      "promotionDToCConfirmed": 25,
+      "pointsRankingDIfBothCleared": 147,
+      "promotionIfBothCleared": 27,
+      "previouslyMisclassifiedToLevelC": 3,
+      "priorCRankPlayersToValidate": [
+        "30071851",
+        "30098406"
+      ]
+    }
+  ],
+  "updatedPartialSeason": {
+    "resultsCalculated": 1248,
+    "participationsPending": 73,
+    "rankingD": 3077,
+    "rankingC": 1983,
+    "promotionDToC": 647,
+    "V9IdentityCollisions": 5,
+    "V9RowsQuarantined": 10,
+    "unmergedV10SinglesMatches": 563,
+    "historicalBrusselsDFallbackOnly": true
+  },
+  "checkedRestrictions": {
+    "singlesOnly": true,
+    "mixedSexSinglesAllowed": true,
+    "realPlayedParticipantsOnly": true,
+    "woOnlyExcluded": true,
+    "TSDisplayedStandingsIgnored": true,
+    "ageMajorityByValidPlayers": true,
+    "historicalScoresUsedOnlyForComparisonExceptBrusselsD": true,
+    "noOfficialChangesWithoutHumanValidation": true
+  },
+  "sourceEventPages": {
+    "Enghien": "404",
+    "Leglise": "404",
+    "note": "V11 archived event-page text is 404; match pages contain usable results; event inventory cannot be claimed validated"
+  },
+  "pending": [
+    "Reconstruct 4 Léglise U15-U17 boys positions or flag precise uncertainty",
+    "Confirm prior-C two Volants D competitors at Jan 18 2026",
+    "Audit 5 identity collisions from V9",
+    "Integrate remaining 563 V10 singles matches",
+    "Verify all tournament event listings and date-specific eligibility"
+  ]
+}
