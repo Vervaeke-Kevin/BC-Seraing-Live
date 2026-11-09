@@ -15,7 +15,10 @@
     ],
     "excludeExclusivelyU9": true,
     "excludeFriendlyEvents": true,
-    "excludeCEvents": true
+    "excludeCEvents": true,
+    "onlySingles": true,
+    "excludesDoubleAndMixedDoubles": true,
+    "mixedSexSinglesEligible": true
   },
   "participantBrackets": [
     {
@@ -47,5 +50,5 @@
   "promotionThreshold": 6,
   "resetsOnChangeOfAgeCategory": true,
   "updateOfficialStatusOnlyWithHumanApproval": true,
-  "note": "L'atteinte de 6 points signale une montée à valider et ne change pas rétroactivement l'éligibilité D tant que le changement de statut n'est pas officiel; compter uniquement les participants réellement valides."
+  "note": "L'atteinte de 6 points signale une montée à valider et ne change pas rétroactivement l'éligibilité D tant que le changement de statut n'est pas officiel; compter uniquement les participants réellement valides. Dans tous les cas, seuls les tableaux de simple sont comptabilisés."
 }
