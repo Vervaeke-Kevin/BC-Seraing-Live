@@ -1,31 +1,36 @@
 /**
  * Classement jeunes LFBB : seules les épreuves de SIMPLE sont éligibles.
- * SG et SF sont des labels de simple; un tableau SG/SF réunissant filles et
- * garçons reste UNE épreuve de simple. DG, DF, DM, DX et MX sont des doubles.
- * Le niveau D/C et le sexe des joueurs ne déterminent pas la discipline.
+ * La présence de filles et garçons dans un MÊME tableau n'en fait pas un double.
+ * Des tableaux SM et SD distincts ne doivent pas être fusionnés.
  */
 const clean = value => String(value ?? "").normalize("NFKD")
   .replace(/[\u0300-\u036f]/g, "").trim().toUpperCase();
 
 export function classifyEventDiscipline(result = {}) {
-  const explicit = clean(result.eventDiscipline ?? result.discipline ?? result.eventType ?? "");
-  if (explicit) {
-    if (/^(S|SINGLE|SINGLES|SIMPLE|ENKEL|ENKELSPEL)$/.test(explicit)) return "singles";
-    if (/^(D|DOUBLE|DOUBLES|DUBBEL|DUBBELSPEL|MIXED_DOUBLES|MIXED-DOUBLES|MIXTE_DOUBLES|MIXTE-DOUBLES)$/.test(explicit)) return "doubles";
-    // Un nom de discipline inconnu est un cas à contrôler, pas une preuve de simple.
-    return "unknown";
-  }
-
   const name = clean(result.drawName ?? result.eventName ?? result.eventLabel ?? "");
+  const declared = clean(result.eventDiscipline ?? result.discipline ?? result.eventType ?? "");
+  let fromName = "unknown";
   if (name) {
+    // "C U13-DG" et "BDU13" sont également des épreuves de double.
     if (/^(DG|DF|DM|DD|DX|MX|MD|WD|XD)\b/.test(name)
-      || /\b(DOUBLE(S)?|DUBBEL(SPEL)?|MIXED DOUBLES|DOUBLE MIXTE)\b/.test(name)) return "doubles";
-    if (/^(SG|SF|SM|SD|MS|WS|BS|GS)\b/.test(name)
-      || /\b(SIMPLE(S)?|SINGLE(S)?|ENKELSPEL|ENKEL)\b/.test(name)) return "singles";
+      || /^BDU\d+\b/.test(name)
+      || /(?:^|[\s-])(DG|DF|DM|DD|DX|MX|MD|WD|XD)(?:\b|$)/.test(name)
+      || /\b(DOUBLE(S)?|DUBBEL(SPEL)?|MIXED DOUBLES)\b/.test(name)) fromName = "doubles";
+    else if (/^(SG|SF|SM|SD|MS|WS|BS|GS)\b/.test(name)
+      || /^BSU\d+\b/.test(name)
+      || /(?:^|[\s-])(SG|SF|SM|SD|MS|WS)(?:\b|$)/.test(name)
+      || /\b(SIMPLE(S)?|SINGLE(S)?|ENKELSPEL|ENKEL)\b/.test(name)) fromName = "singles";
   }
 
-  // Les rencontres peuvent confirmer la discipline seulement si chaque match
-  // a des équipes dont l'effectif est connu et cohérent.
+  let fromDeclared = "unknown";
+  if (/^(S|SINGLE|SINGLES|SIMPLE|ENKEL|ENKELSPEL)$/.test(declared)) fromDeclared = "singles";
+  if (/^(D|DOUBLE|DOUBLES|DUBBEL|DUBBELSPEL|MIXED_DOUBLES|MIXED-DOUBLES|MIXTE_DOUBLES|MIXTE-DOUBLES)$/.test(declared)) fromDeclared = "doubles";
+
+  // Une contradiction explicite entre les métadonnées et le libellé bloque le calcul.
+  if (fromDeclared !== "unknown" && fromName !== "unknown" && fromDeclared !== fromName) return "unknown";
+  if (fromDeclared !== "unknown") return fromDeclared;
+  if (fromName !== "unknown") return fromName;
+
   const teams = result.teams;
   if (Array.isArray(teams) && teams.length === 2 && teams.every(Array.isArray)
       && teams.every(t => t.length === teams[0].length)) {
