@@ -4,6 +4,8 @@
  * d'épreuve normalisés au préalable. Les doublons/forfaits sont traités en amont.
  * Aucune écriture sur le classement officiel.
  */
+import {classifyEventDiscipline} from "./event-discipline.mjs";
+
 function participantBucket(count) {
   if (!Number.isInteger(count) || count < 1) throw new Error("Nombre de participants réels invalide");
   if (count <= 3) return "1à3";
@@ -37,6 +39,9 @@ export function calculateYouthPoints(result, rankingTables, promotionRules) {
   const age = String(result.eventAge || "").toUpperCase();
   const level = String(result.eventLevel || "").toUpperCase();
   const base = {rankingD: 0, rankingC: 0, promotionDToC: 0};
+  const discipline = classifyEventDiscipline(result);
+  if (discipline === "doubles") return {...base, included: false, reason: "épreuve de double hors ranking LFBB jeunes"};
+  if (discipline !== "singles") throw new Error("Discipline du tableau non confirmée : calcul bloqué, simple à vérifier");
   if (result.cancelled || result.friendly) return {...base, included: false, reason: "tournoi ou tableau non officiel"};
   if (age === "U9") return {...base, included: false, reason: "tableau exclusivement U9"};
   if (!["U11","U13","U15","U17","U19"].includes(age)) {
