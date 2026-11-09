@@ -1,0 +1,51 @@
+{
+  "version": "lfbb-youth-promotion-d-to-c-2025-08-01",
+  "status": "official_rule_reference_with_human_validation",
+  "effectiveFrom": "2025-08-01",
+  "sourceUrl": "https://lfbb.be/criteres-montee-d-c-tournois-jeunes-lfbb/",
+  "sourcePublishedOn": "2025-06-26",
+  "scope": {
+    "onlyLevel": "D",
+    "allowedAgeCategories": [
+      "U11",
+      "U13",
+      "U15",
+      "U17",
+      "U19"
+    ],
+    "excludeExclusivelyU9": true,
+    "excludeFriendlyEvents": true,
+    "excludeCEvents": true
+  },
+  "participantBrackets": [
+    {
+      "min": 0,
+      "max": 3,
+      "winner": 0,
+      "finalist": 0
+    },
+    {
+      "min": 4,
+      "max": 7,
+      "winner": 2,
+      "finalist": 1
+    },
+    {
+      "min": 8,
+      "max": 11,
+      "winner": 4,
+      "finalist": 2
+    },
+    {
+      "min": 12,
+      "max": null,
+      "winner": 6,
+      "finalist": 3
+    }
+  ],
+  "placementsOtherThanWinnerOrFinalist": 0,
+  "promotionThreshold": 6,
+  "resetsOnChangeOfAgeCategory": true,
+  "updateOfficialStatusOnlyWithHumanApproval": true,
+  "note": "L'atteinte de 6 points signale une montée à valider et ne change pas rétroactivement l'éligibilité D tant que le changement de statut n'est pas officiel; compter uniquement les participants réellement valides."
+}
