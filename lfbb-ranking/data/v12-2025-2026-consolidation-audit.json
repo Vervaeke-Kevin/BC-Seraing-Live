@@ -1,0 +1,106 @@
+{
+  "version": 12,
+  "season": "2025-2026",
+  "date": "2026-11-09",
+  "status": "PROVISIONAL_INCOMPLETE_NO_OFFICIAL_CHANGES",
+  "input": {
+    "baseline": "V11 matches-only consolidated (1,248 calculated, 73 pending)",
+    "additionalSource": "V10 singles-only filtered archive: 10 tournaments, 563 matches",
+    "excludedV10Doubles": 73,
+    "acceptedEligibility": "Singles only, including mixed-sex singles; U9 exclusive excluded",
+    "scoreProof": "TS match winners, set scores, group stages, classification matches and full Monrad paths",
+    "forbidden": "TournamentSoftware displayed player standings, except Brussels D legacy historical fallback"
+  },
+  "v10": {
+    "actualEventGroups": 46,
+    "calculatedResults": 277,
+    "pendingResults": 40,
+    "addedRankingD": 318,
+    "addedRankingC": 1575,
+    "addedPromotionDToC": 78,
+    "resultsFromQualifyingPoolWinnerRoundRobin": 6,
+    "allMatchesMappedExactlyOnce": true,
+    "playedParticipantRows": 317,
+    "eventTotals": {
+      "Écaussinnes C": {
+        "calculated": 26,
+        "pending": 0,
+        "rankingC": 283
+      },
+      "BEC C": {
+        "calculated": 13,
+        "pending": 6,
+        "rankingC": 190
+      },
+      "Grâce D": {
+        "calculated": 40,
+        "pending": 8,
+        "rankingD": 74,
+        "promotionDToC": 18
+      },
+      "Bad79 C": {
+        "calculated": 29,
+        "pending": 3,
+        "rankingC": 298
+      },
+      "Soignies C": {
+        "calculated": 17,
+        "pending": 5,
+        "rankingC": 193
+      },
+      "Écaussinnes D": {
+        "calculated": 46,
+        "pending": 6,
+        "rankingD": 110,
+        "promotionDToC": 30
+      },
+      "Ciney C": {
+        "calculated": 28,
+        "pending": 6,
+        "rankingC": 284
+      },
+      "Villers-Wanze C": {
+        "calculated": 16,
+        "pending": 0,
+        "rankingC": 107
+      },
+      "Rixensart D": {
+        "calculated": 48,
+        "pending": 0,
+        "rankingD": 134,
+        "promotionDToC": 30
+      },
+      "Manage C": {
+        "calculated": 14,
+        "pending": 6,
+        "rankingC": 220
+      }
+    }
+  },
+  "seasonPartial": {
+    "calculatedResults": 1525,
+    "pendingResults": 113,
+    "rankingD": 3395,
+    "rankingC": 3558,
+    "promotionDToC": 725,
+    "historicalReferenceUser": {
+      "rankingD": 3820,
+      "rankingC": 3923
+    },
+    "differenceAgainstUserReference": {
+      "rankingD": -425,
+      "rankingC": -365
+    },
+    "historicalSheetTotalsDifferentFromUserReference": {
+      "rankingD": 3884,
+      "rankingC": 3966
+    }
+  },
+  "remainingAudit": [
+    "V10 has 40 pending result rows: incomplete classification phases, points-tier crossing, or licence collisions.",
+    "V11 has 73 pending rows including four Léglise C positions, older V9 identity collisions, two Les Volants D date-of-ranking cases.",
+    "The 2025-26 season is not officially validated by the LFBB; totals are not official. TS Events page coverage also not yet independently verified."
+  ],
+  "privacy": "Only aggregate audit is stored here. Individual players and member IDs are kept in user-accessible local files, not this public repository.",
+  "outputNotes": "V12 HTML, CSV and JSON bundle created locally; user will receive link on conversation, not external publication."
+}
