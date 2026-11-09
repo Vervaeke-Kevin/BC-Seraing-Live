@@ -1,10 +1,16 @@
 {
-  "version": "lfbb-ranking-tjo-2025-2026-from-TJ025-26-ranking-tables",
-  "description": "Barème LFBB D/C 2025-2026, valeurs par niveau d'épreuve, âge retenu, tranche de participants et place. Source: feuille Ranking_Tables du classeur historique; pas les résultats individuels.",
-  "sourceSpreadsheetUrl": "https://docs.google.com/spreadsheets/d/1Giy9TiytKinDt_l-AJMd96IQVooyR8sYrmFjoIRw9OA",
-  "sourceSheet": "Ranking_Tables",
-  "excludeExclusiveU9": true,
-  "officialRankingsMayBeUpdatedOnlyAfterHumanValidation": true,
+  "version": "lfbb-ranking-tjo-2025-2026-v1",
+  "source": {
+    "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/1Giy9TiytKinDt_l-AJMd96IQVooyR8sYrmFjoIRw9OA",
+    "sheet": "Ranking_Tables",
+    "note": "Barème uniquement. Les lignes individuelles de résultats servent à la comparaison, à l'exception de Brussels D."
+  },
+  "policies": {
+    "excludeExclusiveU9": true,
+    "atTertExcludeFriendlyC": true,
+    "rankingOfficialOnlyAfterHumanApproval": true,
+    "mixedAge": "most_participants_by_registered_age_then_oldest_on_tie"
+  },
   "tables": {
     "U11": {
       "C": {
@@ -40,7 +46,8 @@
           "29": 0,
           "30": 0,
           "31": 0,
-          "NaN": 2
+          "F.Conso": 1,
+          "V.Conso": 2
         },
         "1à3": {
           "1": 0,
@@ -55,7 +62,8 @@
           "5": 1,
           "6": 1,
           "7": 1,
-          "NaN": 0
+          "F.Conso": 0,
+          "V.Conso": 0
         },
         "8à15": {
           "1": 6,
@@ -73,7 +81,8 @@
           "13": 1,
           "14": 1,
           "15": 1,
-          "NaN": 1
+          "F.Conso": 0,
+          "V.Conso": 1
         }
       },
       "D": {
@@ -109,7 +118,8 @@
           "29": 0,
           "30": 0,
           "31": 0,
-          "NaN": 1
+          "F.Conso": 0,
+          "V.Conso": 1
         },
         "1à3": {
           "1": 0,
@@ -124,7 +134,8 @@
           "5": 0,
           "6": 0,
           "7": 0,
-          "NaN": 0
+          "F.Conso": 0,
+          "V.Conso": 0
         },
         "8à15": {
           "1": 4,
@@ -142,7 +153,8 @@
           "13": 0,
           "14": 0,
           "15": 0,
-          "NaN": 1
+          "F.Conso": 0,
+          "V.Conso": 1
         }
       }
     },
@@ -180,7 +192,8 @@
           "29": 4,
           "30": 4,
           "31": 4,
-          "NaN": 5
+          "F.Conso": 3,
+          "V.Conso": 5
         },
         "1à3": {
           "1": 0,
@@ -195,7 +208,8 @@
           "5": 2,
           "6": 2,
           "7": 2,
-          "NaN": 0
+          "F.Conso": 0,
+          "V.Conso": 0
         },
         "8à15": {
           "1": 12,
@@ -213,7 +227,8 @@
           "13": 4,
           "14": 4,
           "15": 4,
-          "NaN": 3
+          "F.Conso": 0,
+          "V.Conso": 3
         }
       },
       "D": {
@@ -249,7 +264,8 @@
           "29": 0,
           "30": 0,
           "31": 0,
-          "NaN": 3
+          "F.Conso": 2,
+          "V.Conso": 3
         },
         "1à3": {
           "1": 0,
@@ -264,7 +280,8 @@
           "5": 0,
           "6": 0,
           "7": 0,
-          "NaN": 0
+          "F.Conso": 0,
+          "V.Conso": 0
         },
         "8à15": {
           "1": 8,
@@ -282,7 +299,8 @@
           "13": 0,
           "14": 0,
           "15": 0,
-          "NaN": 2
+          "F.Conso": 0,
+          "V.Conso": 2
         }
       }
     },
@@ -320,7 +338,8 @@
           "29": 6,
           "30": 6,
           "31": 6,
-          "NaN": 8
+          "F.Conso": 4,
+          "V.Conso": 8
         },
         "1à3": {
           "1": 0,
@@ -335,7 +354,8 @@
           "5": 3,
           "6": 3,
           "7": 3,
-          "NaN": 0
+          "F.Conso": 0,
+          "V.Conso": 0
         },
         "8à15": {
           "1": 20,
@@ -353,7 +373,8 @@
           "13": 6,
           "14": 6,
           "15": 6,
-          "NaN": 5
+          "F.Conso": 0,
+          "V.Conso": 5
         }
       },
       "D": {
@@ -389,7 +410,8 @@
           "29": 0,
           "30": 0,
           "31": 0,
-          "NaN": 5
+          "F.Conso": 3,
+          "V.Conso": 5
         },
         "1à3": {
           "1": 0,
@@ -404,7 +426,8 @@
           "5": 0,
           "6": 0,
           "7": 0,
-          "NaN": 0
+          "F.Conso": 0,
+          "V.Conso": 0
         },
         "8à15": {
           "1": 12,
@@ -422,7 +445,8 @@
           "13": 0,
           "14": 0,
           "15": 0,
-          "NaN": 3
+          "F.Conso": 0,
+          "V.Conso": 3
         }
       }
     },
@@ -460,7 +484,8 @@
           "29": 9,
           "30": 9,
           "31": 9,
-          "NaN": 11
+          "F.Conso": 6,
+          "V.Conso": 11
         },
         "1à3": {
           "1": 0,
@@ -475,7 +500,8 @@
           "5": 6,
           "6": 6,
           "7": 6,
-          "NaN": 0
+          "F.Conso": 0,
+          "V.Conso": 0
         },
         "8à15": {
           "1": 30,
@@ -493,7 +519,8 @@
           "13": 9,
           "14": 9,
           "15": 9,
-          "NaN": 8
+          "F.Conso": 0,
+          "V.Conso": 8
         }
       },
       "D": {
@@ -529,7 +556,8 @@
           "29": 0,
           "30": 0,
           "31": 0,
-          "NaN": 6
+          "F.Conso": 3,
+          "V.Conso": 6
         },
         "1à3": {
           "1": 0,
@@ -544,7 +572,8 @@
           "5": 0,
           "6": 0,
           "7": 0,
-          "NaN": 0
+          "F.Conso": 0,
+          "V.Conso": 0
         },
         "8à15": {
           "1": 18,
@@ -562,7 +591,8 @@
           "13": 0,
           "14": 0,
           "15": 0,
-          "NaN": 4
+          "F.Conso": 0,
+          "V.Conso": 4
         }
       }
     },
@@ -600,7 +630,8 @@
           "29": 15,
           "30": 15,
           "31": 15,
-          "NaN": 19
+          "F.Conso": 6,
+          "V.Conso": 19
         },
         "1à3": {
           "1": 0,
@@ -615,7 +646,8 @@
           "5": 10,
           "6": 10,
           "7": 10,
-          "NaN": 0
+          "F.Conso": 0,
+          "V.Conso": 0
         },
         "8à15": {
           "1": 50,
@@ -633,7 +665,8 @@
           "13": 15,
           "14": 15,
           "15": 15,
-          "NaN": 12
+          "F.Conso": 0,
+          "V.Conso": 12
         }
       },
       "D": {
@@ -669,7 +702,8 @@
           "29": 0,
           "30": 0,
           "31": 0,
-          "NaN": 11
+          "F.Conso": 6,
+          "V.Conso": 11
         },
         "1à3": {
           "1": 0,
@@ -684,7 +718,8 @@
           "5": 0,
           "6": 0,
           "7": 0,
-          "NaN": 0
+          "F.Conso": 0,
+          "V.Conso": 0
         },
         "8à15": {
           "1": 30,
@@ -702,13 +737,16 @@
           "13": 0,
           "14": 0,
           "15": 0,
-          "NaN": 8
+          "F.Conso": 0,
+          "V.Conso": 8
         }
       }
     }
   },
-  "metadata": {
-    "sourceRows": 649,
-    "createdAt": "2026-11-09"
+  "importAudit": {
+    "rows": 649,
+    "ignored": 29,
+    "numbered": 560,
+    "consolation": 60
   }
 }
