@@ -9,7 +9,14 @@
     "excludeExclusiveU9": true,
     "atTertExcludeFriendlyC": true,
     "rankingOfficialOnlyAfterHumanApproval": true,
-    "mixedAge": "most_participants_by_registered_age_then_oldest_on_tie"
+    "mixedAge": "most_participants_by_registered_age_then_oldest_on_tie",
+    "allowedDisciplines": [
+      "singles"
+    ],
+    "excludeDoublesAndMixedDoubles": true,
+    "mixedSexSinglesAllowed": true,
+    "countRealParticipantsPerActualTSEvent": true,
+    "TSEventsRegistrationCountsMayIncludeWO": true
   },
   "tables": {
     "U11": {
