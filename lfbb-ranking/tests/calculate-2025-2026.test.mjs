@@ -6,7 +6,7 @@ import {calculateYouthPoints} from "../src/calculate-2025-2026.mjs";
 const ranking = JSON.parse(await readFile(new URL("../config/ranking-points-2025-2026.json", import.meta.url), "utf8"));
 const promotion = JSON.parse(await readFile(new URL("../config/promotion-d-to-c-2025-2026.json", import.meta.url), "utf8"));
 const point = (eventAge,eventLevel,validParticipants,placement,other={}) =>
-  calculateYouthPoints({eventAge,eventLevel,validParticipants,placement,...other},ranking,promotion);
+  calculateYouthPoints({eventAge,eventLevel,validParticipants,placement,eventDiscipline:"singles",...other},ranking,promotion);
 
 test("K2 U15 D: 12 points de ranking D mais 4 points de montée", () =>
   assert.deepEqual([point("U15","D",9,1).rankingD,point("U15","D",9,1).promotionDToC],[12,4]));
@@ -32,3 +32,29 @@ test("32 joueurs sans tranche dans la table historique => contrôler", () =>
   assert.throws(()=>point("U17","D",32,1)));
 test("Age fusionné non résolu => contrôler", () =>
   assert.throws(()=>point("U13/U15","D",10,1)));
+
+test("Double DG U15 C exclu, même si l'import disait simple", () => {
+  const r=point("U15","C",8,1,{drawName:"C U15-DG",eventDiscipline:"simple"});
+  assert.equal(r.included,false);
+  assert.deepEqual([r.rankingD,r.rankingC,r.promotionDToC],[0,0,0]);
+});
+test("Double filles et garçons mixte exclu", () => {
+  const r=point("U15","C",8,1,{drawName:"Double Garçons/Filles U13 C"});
+  assert.equal(r.included,false);
+});
+test("Simple garçons/filles partagé : un seul tableau de simple valide", () => {
+  const r=point("U15","C",6,1,{drawName:"Simple Garçons/Filles U15 - C"});
+  assert.equal(r.included,true);
+  assert.equal(r.rankingC,10);
+});
+test("Simple dames SD et simple messieurs SM ne sont pas du double", () => {
+  assert.equal(point("U13","D",7,1,{drawName:"SD U13 D - Groupe A"}).rankingD,4);
+  assert.equal(point("U13","D",7,1,{drawName:"SM U13 D - Groupe A"}).rankingD,4);
+});
+test("Épreuve non identifiable : ne pas inventer de points", () => {
+  assert.throws(()=>calculateYouthPoints({eventAge:"U15",eventLevel:"C",validParticipants:8,placement:1},ranking,promotion),/Discipline/);
+});
+test("Double interdit même si sa place finale est connue", () => {
+  const r=point("U17","D",9,1,{drawName:"Double Garçons U17 D"});
+  assert.equal(r.rankingD,0); assert.equal(r.promotionDToC,0);
+});
